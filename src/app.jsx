@@ -1,8 +1,8 @@
+import Main from "./components/layouts/landing/main";
+
 function App() {
   return (
-    <div className="App">
-      프론트엔드.test
-    </div>
+    <Main />
   );
 }
 export default App;
