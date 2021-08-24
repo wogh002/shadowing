@@ -1,8 +1,11 @@
+import Header from "./components/layouts/landing/header";
 import Main from "./components/layouts/landing/main";
-
 function App() {
   return (
-    <Main />
+    <>
+      <Header />
+      <Main />
+    </>
   );
 }
 export default App;

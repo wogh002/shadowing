@@ -4,11 +4,14 @@ import MenuItmes from "./menuItmes";
 const DropDownWrapper = styled.div`
     position: relative;
     opacity: 0;
-    z-index:-1;
+    z-index : -2;
     ${({ open }) => open && css`
         opacity: 1;
-        height: 27vh;
-        z-index:1;
+        z-index : 2;
+        & + main h1{
+         /* shadowing Title */
+            opacity: 0;
+        }
     `}
     & div {
         border: 1px solid #e9ecef;
@@ -17,7 +20,7 @@ const DropDownWrapper = styled.div`
         left:3%;
         min-width: 123px;
         width: 38%;
-        height: 1px;
+        height: 0;
         transition: height 250ms ease-in-out;
         border-radius: 10px;
         box-shadow: 1px 3px 14px 0px rgba(0,0,0,0.69);
