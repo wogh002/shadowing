@@ -1,11 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { faRocket } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Items = styled.ul`
     padding: 17px;
     & li {
-        opacity: 0.6;
+        opacity: 0.9;
         text-align:left;    
         font-size: 18px;
         margin-bottom: 30px;
@@ -22,7 +20,7 @@ const Items = styled.ul`
        /* --- desktop --- */
     @media ${({ theme: { desktop } }) => desktop} {
         &{
-            /* flex 상태 */
+            /* flex 상태 (header 에서 flex 줬음) */
             padding: 0;
         }
         & li{
@@ -32,8 +30,8 @@ const Items = styled.ul`
             :hover::after{
                 content : "";
                 top: 80px;
-                left:32px;
-                width:60%;
+                left:17px;
+                width:80%;
                 height:2px;
                 background-color: #0066ff;
                 position: absolute;
@@ -45,15 +43,12 @@ const MenuItmes = () => {
     return (
         <Items>
             <li>
-                <FontAwesomeIcon icon={faRocket} />
                 <span>Menu</span>
             </li>
             <li>
-                <FontAwesomeIcon icon={faRocket} />
                 <span>Menu</span>
             </li>
             <li>
-                <FontAwesomeIcon icon={faRocket} />
                 <span>Menu</span>
             </li>
         </Items>

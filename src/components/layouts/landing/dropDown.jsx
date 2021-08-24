@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled, { css } from 'styled-components';
 import MenuItmes from "./menuItmes";
 const DropDownWrapper = styled.div`
@@ -29,13 +29,15 @@ const DropDownWrapper = styled.div`
         `}
     }
     @media ${({ theme: { desktop } }) => desktop} {
+        /* pc일 경우 드롭다운 보이지 않게 */
         display:none;
     }
 `
-const DropDown = ({ open }) => {
+const DropDown = ({ open, setOpen }) => {
+    const onHideDropDown = useCallback(() => setOpen(false), [setOpen]);
     return (
         <DropDownWrapper open={open}>
-            <div open={open}>
+            <div open={open} onMouseLeave={onHideDropDown}>
                 <MenuItmes />
             </div>
         </DropDownWrapper>

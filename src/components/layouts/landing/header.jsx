@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MenuItmes from "./menuItmes";
@@ -12,6 +12,7 @@ const HeaderTag = styled.header`
     padding: 15px;
     border-bottom: 1px solid #e9ecef;
     & > ul {
+        /* pc 드롭다운은 모바일에서 보이지 않게 설정*/
         display:none;
     }
     & > img {
@@ -30,11 +31,11 @@ const HeaderTag = styled.header`
             display:none;
         }
         & > ul {
+            /* 드롭다운 menuItmes.jsx*/
             display:flex;
         }
     }
 `
-
 const UserInfoWrapper = styled.div`
     & button {
         font-size : 18px;
@@ -54,14 +55,15 @@ const Header = () => {
                             <FontAwesomeIcon icon={faCaretDown} size="lg" />
                     }
                 </button>
-                
+                {/* pc 일때만 보이는 menuItmes,IMAGE */}
                 <img src={logo} alt="logo" />
                 <MenuItmes />
                 <UserInfoWrapper>
                     <button>Sign Up</button>
                 </UserInfoWrapper>
             </HeaderTag>
-            <DropDown open={open} />
+            {/* pc일 경우 드롭다운 보이지 않게 설정함 */}
+            <DropDown open={open} setOpen={setOpen} />
         </>
     )
 };
