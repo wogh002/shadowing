@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MenuItmes from "./menuItmes";
 import DropDown from "./dropDown";
 import logo from "../../../assets/logo.png";
+import { Link } from 'react-router-dom';
 const HeaderTag = styled.header`
     display: flex;
     justify-content: space-between;
@@ -58,9 +59,13 @@ const Header = () => {
                 {/* pc 일때만 보이는 menuItmes,IMAGE */}
                 <img src={logo} alt="logo" />
                 <MenuItmes />
-                <UserInfoWrapper>
-                    <button>Sign Up</button>
-                </UserInfoWrapper>
+
+                <Link to="/signup">
+                    <UserInfoWrapper>
+                        <button>Sign Up</button>
+                    </UserInfoWrapper>
+                </Link>
+                
             </HeaderTag>
             {/* pc일 경우 드롭다운 보이지 않게 설정함 */}
             <DropDown open={open} setOpen={setOpen} />
