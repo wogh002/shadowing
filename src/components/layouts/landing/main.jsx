@@ -1,6 +1,7 @@
 import React from "react";
 import illustration from "../../../assets/Illustration.png"
 import { MainTag } from "../../../styles/landing/main";
+import { Link } from 'react-router-dom';
 const Main = () => {
     return (
         <MainTag>
@@ -12,7 +13,9 @@ const Main = () => {
                 if you use this app, <br />you can speak Korean fluently <br />
                 JUST TRUST THIS APP ! 💕
             </p>
-            <button>Sign Up</button>
+            <Link to="/signup">
+                <button>Sign Up</button>
+            </Link>
         </MainTag>
     )
 };

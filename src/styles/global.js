@@ -54,5 +54,8 @@ input{
 	border : none;
 	font-family: 'Poppins', sans-serif;
 }
+a{
+	text-decoration: none;
+}
 `
 export default GlobalStyle;
