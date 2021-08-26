@@ -3,7 +3,7 @@ const router = express.Router();
 
 module.exports = (pool) => {
     router.post('/join', (req, res, next) => {
-        let sql = '';
+        let sql = 'INSERT INTO userdata_tb VALUES (null,?,?,?,0)';
         let id = req.body.id;
         let password = req.body.password;
         let name = req.body.name;
