@@ -1,24 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 export const Form = styled.form`
     padding: 50px;
     border-bottom: 1px solid #e9ecef;
         div {
             position: relative;
             margin: 0 auto;
-        }
-        div span {
-            position: absolute;
-            top: 19px;
-            right: -50px;
-            cursor: pointer;
-            letter-spacing: -0.05em;
-            opacity: 0.8;
-            color: #FF3399;
-            font-weight:700;
-            transition: all 250ms ease-in-out;
-            :hover{
-                opacity: 1;
-            }
         }
         h1 { 
             white-space: nowrap;
@@ -45,9 +31,6 @@ export const Form = styled.form`
         div input{
             width: 100%;
         }
-        div span {
-            font-size: 19px;
-        }
         h1 { 
             margin-bottom: 50px;
             font-size : 27px;
@@ -64,5 +47,22 @@ export const Form = styled.form`
             font-size: 16px;
             margin:0 auto;
         }
+    }
+`
+export const Span = styled.span`
+    position: absolute;
+    top: 19px;
+    right: -50px;
+    cursor: pointer;
+    letter-spacing: -0.05em;
+    opacity: 0.8;
+    color: #FF3399;
+    font-weight:700;
+    transition: all 250ms ease-in-out;
+    :hover{
+        opacity: 1;
+    }
+    @media ${({ theme: { desktop } }) => desktop} {
+        font-size: 19px;
     }
 `

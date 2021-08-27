@@ -16,8 +16,9 @@ const initalState = {
     checkIdLoading: false, //중복 체크 시도중
     checkIdDone: false,
     checkIdError: false,
+    isCheckIdPass: false, //중복id 있는지 없는지
 }
-//이전 상태를 최신 상태로 교체 (은행원)
+//이전 상태를 최신 상태로 교체
 const reducer = (state = initalState, action) => {
     switch (action.type) {
         case CHECK_ID_REQUEST:
@@ -26,12 +27,15 @@ const reducer = (state = initalState, action) => {
                 checkIdLoading: true,
                 checkIdDone: false,
                 checkIdError: false,
+                isCheckIdPass: false,
             }
         case CHECK_ID_SUCCESS:
             return {
                 ...state,
                 checkIdLoading: false,
                 checkIdDone: true,
+                //가입가능하면 true 중복된 아이디 있으면 false,
+                isCheckIdPass: false,
             }
         case CHECK_ID_FAILURE:
             return {
