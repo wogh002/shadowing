@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
+import { ErrorMessage } from "../error/style";
 export const Form = styled.form`
     padding: 50px;
     border-bottom: 1px solid #e9ecef;
@@ -49,23 +50,54 @@ export const Form = styled.form`
         }
     }
 `
+const circle = keyframes`
+    0% {
+        opacity : 1;
+        border-color : #69c893;
+        transform: rotate(0deg);
+    }
+    50% {
+        opacity : 0.7;
+        border-color : #69c893;
+        transform: rotate(180deg);
+    }
+    100% {
+        opacity : 0.3;
+        border-color : #ccffcc;
+        transform: rotate(360deg);
+    }
+`
 export const Span = styled.span`
     position: absolute;
     top: 19px;
     right: -50px;
     cursor: pointer;
     letter-spacing: -0.05em;
-    opacity: 0.8;
     color: #FF3399;
     font-weight:700;
     transition: all 250ms ease-in-out;
-    :hover{
-        opacity: 1;
-    }
     ${({ loading }) => loading === "true" && css`
-        color:black;
+    opacity: 0.5;
+        ::after{
+            content:"";
+            display:inline-block;
+            border :2px solid black;
+            border-radius :50%;
+            width : 10px;
+            height : 10px;
+            animation : ${circle} 1s linear forwards;
+        }        
     `}
     @media ${({ theme: { desktop } }) => desktop} {
         font-size: 19px;
+    }
+`
+
+export const ErrorMsg = styled(ErrorMessage)`
+    top:-20px;
+    left:15px;
+    @media ${({ theme: { desktop } }) => desktop} {
+        min-width:320px;
+        font-size: 14px;
     }
 `

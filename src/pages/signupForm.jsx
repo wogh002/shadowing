@@ -2,43 +2,40 @@ import React, { useState, useCallback } from 'react';
 import Header from '../components/layouts/landing/header';
 import Footer from '../components/layouts/landing/footer';
 import { Input, PurpleBtn } from "../styles/formElements/style";
-import { Form, Span } from "../styles/forms/signupForm";
-import { ErrorMessage } from "../styles/error/style";
+import { Form, Span, ErrorMsg } from "../styles/forms/signupForm";
 import { useDispatch, useSelector } from 'react-redux';
 import { checkIdRequestAction } from '../reducers/user';
-import styled from 'styled-components';
 import useInput from '../hooks/useInput';
 import { useEffect } from 'react';
 import { CHECK_ID_RESET } from '../reducers/user';
 // 첫글자는 반드시 영문소문자, 영문소문자 a-z 숫자 0 ~ 9 까지 허용/  5~15자 이하로 이루어지고, 숫자가 하나 이상 포함되어야한다.
 const ID_REG = /^[a-z][a-z\d]{4,14}$/;
 let clickedCheckId = undefined;
-const ErrorMsg = styled(ErrorMessage)`
-    top:-20px;
-    left:15px;
-    @media ${({ theme: { desktop } }) => desktop} {
-        min-width:320px;
-        font-size: 14px;
-    }
-`
 const SignupForm = () => {
-    const dispatch = useDispatch();
     const [id, setId] = useInput('');
     const [nickname, setNickname] = useInput('');
-    const [password, setPassword] = useInput('');
-    const [confirmPassword, setConfirmPassword] = useInput('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [checkPasswordError, setCheckPasswordError] = useState(false);
     const { checkIdLoading, checkIdDone, isCheckIdPass } = useSelector(({ user }) => user);
-
+    const dispatch = useDispatch();
     const onCheckId = useCallback(() => {
         clickedCheckId = id;
-        ID_REG.test(id) && dispatch(checkIdRequestAction({ useId: id }));
+        ID_REG.test(id) && dispatch(checkIdRequestAction({ userId: id }));
     }, [id, dispatch]);
-
     //체크버튼 눌렀을때의 id와 현재의 id가 다르다면 true
-    const resetId = useCallback(checkId => {
-        clickedCheckId !== checkId && dispatch({ type: CHECK_ID_RESET })
-    }, [dispatch]);
-
+    const resetId = useCallback(checkId => clickedCheckId !== checkId && dispatch({ type: CHECK_ID_RESET }), [dispatch]);
+    const onChangePassword = useCallback(({ target }) => setPassword(target.value), []);
+    const onChangeConfirmPassword = useCallback(({ target }) => setConfirmPassword(target.value), []);
+    useEffect(() => {
+        // 패스워드 달라질경우
+        if (confirmPassword !== password) {
+            setCheckPasswordError(true);
+        }
+        else {
+            setCheckPasswordError(false);
+        }
+    }, [password, confirmPassword]);
     useEffect(() => {
         // 중복된ID 있을 경우
         if (!isCheckIdPass && checkIdDone) {
@@ -48,7 +45,6 @@ const SignupForm = () => {
             resetId(id);
         }
     }, [isCheckIdPass, checkIdDone, id, resetId]);
-
     return (
         <>
             <Header />
@@ -82,19 +78,35 @@ const SignupForm = () => {
                                     ID_REG.test(id) ?
                                         <ErrorMsg color="green">Click Check Button 👉</ErrorMsg>
                                         :
-                                        <ErrorMsg>first character have to use lowercase letter and Only 5 to 15 lower case letters and numbers are allowed</ErrorMsg>
+                                        <ErrorMsg>
+                                            {
+                                                id && "first character have to use lowercase letter and Only 5 to 15 lower case letters and numbers are allowed"
+                                            }
+                                        </ErrorMsg>
                                 }
                             </>
                     }
                 </div>
-                <Input type="text" placeholder="Enter NickName" required onChange={setNickname} maxLength="15" />
-                <Input type="password" placeholder="Enter Password" required onChange={setPassword} maxLength="15" />
-                <Input type="password" placeholder="Confirm Password" required onChange={setConfirmPassword} maxLength="15" />
+                <Input type="text" placeholder="Enter NickName" required onChange={setNickname} maxLength="15" value={nickname} />
+                <Input type="password" placeholder="Enter Password" required onChange={onChangePassword} value={password} maxLength="15" />
+                <div>
+                    <Input type="password" placeholder="Confirm Password" required onChange={onChangeConfirmPassword} value={confirmPassword} maxLength="15" />
+                    {
+                        checkPasswordError ?
+                            <ErrorMsg> password is different </ErrorMsg>
+                            :
+                            <ErrorMsg color="green">
+                                {
+                                    confirmPassword && "password is same 👍"
+                                }
+                            </ErrorMsg>
+
+                    }
+                </div>
                 <PurpleBtn type="submit">Submit</PurpleBtn>
             </Form>
             <Footer />
         </>
     );
 };
-
 export default SignupForm;
