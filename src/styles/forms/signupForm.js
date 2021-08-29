@@ -62,6 +62,9 @@ export const Span = styled.span`
     :hover{
         opacity: 1;
     }
+    ${({ loading }) => loading === "true" && css`
+        color:black;
+    `}
     @media ${({ theme: { desktop } }) => desktop} {
         font-size: 19px;
     }

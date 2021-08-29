@@ -1,3 +1,4 @@
+export const CHECK_ID_RESET = "CHECK_ID_RESET";
 export const CHECK_ID_REQUEST = "CHECK_ID_REQUEST";
 export const CHECK_ID_SUCCESS = "CHECK_ID_SUCCESS";
 export const CHECK_ID_FAILURE = "CHECK_ID_FAILURE";
@@ -21,6 +22,14 @@ const initalState = {
 //이전 상태를 최신 상태로 교체
 const reducer = (state = initalState, action) => {
     switch (action.type) {
+        case CHECK_ID_RESET:
+            return {
+                ...state,
+                checkIdLoading: false,
+                checkIdDone: false,
+                checkIdError: false,
+                isCheckIdPass: false,
+            }
         case CHECK_ID_REQUEST:
             return {
                 ...state,
@@ -35,7 +44,7 @@ const reducer = (state = initalState, action) => {
                 checkIdLoading: false,
                 checkIdDone: true,
                 //가입가능하면 true 중복된 아이디 있으면 false,
-                isCheckIdPass: false,
+                isCheckIdPass: true,
             }
         case CHECK_ID_FAILURE:
             return {
