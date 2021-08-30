@@ -4,16 +4,19 @@ import {
     SIGN_UP_FAILURE, SIGN_UP_REQUEST, SIGN_UP_SUCCESS
 } from '../reducers/user';
 import axios from '../service/axios';
-// const checkIdAPI = (data) => {
-//     return axios.post(`/signup/checkid`, data);
-// }
+const checkIdAPI = (data) => {
+    return axios.post('/user/checkId', data);
+}
+const signUpAPI = data => {
+    return axios.post('/user/join', data);
+}
 function* checkId(action) {
     try {
-        // const result = yield call(checkIdAPI, action.data);
+        const result = yield call(checkIdAPI, action.data);
         yield delay(1000);
         yield put({
             type: CHECK_ID_SUCCESS,
-            data: action.data
+            data: result.data
             // id가 없다면 true , 있다면 false.
         });
     } catch (error) {
@@ -26,11 +29,11 @@ function* checkId(action) {
 }
 function* signUp(action) {
     try {
-        // const result = yield call(checkIdAPI, action.data);
+        const result = yield call(signUpAPI, action.data);
         yield delay(1000);
         yield put({
             type: SIGN_UP_SUCCESS,
-            data: action.data
+            data: result.data
         });
     } catch (error) {
         yield delay(1000);

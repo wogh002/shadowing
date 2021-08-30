@@ -75,20 +75,20 @@ const SignupForm = () => {
                                     <>
                                         {
                                             isCheckIdPass ?
-                                                <ErrorMsg color="green"> Good ID 😍</ErrorMsg>
+                                                <ErrorMsg color="green"> Good ID 👍</ErrorMsg>
                                                 :
-                                                <ErrorMsg> Duplicate. you have to use other id</ErrorMsg>
+                                                <ErrorMsg>❗ Duplicate. you have to use other id</ErrorMsg>
                                         }
                                     </>
                                     :
                                     <>
                                         {
                                             ID_REG.test(id) ?
-                                                <ErrorMsg color="green">Click Check Button 👉</ErrorMsg>
+                                                <ErrorMsg>❗ Click Check Button 👉</ErrorMsg>
                                                 :
                                                 <ErrorMsg>
                                                     {
-                                                        id && "first character have to use lowercase letter and Only 5 to 15 lower case letters and numbers are allowed"
+                                                        id && "❗ first character have to use lowercase letter and Only 5 to 15 lower case letters and numbers are allowed"
                                                     }
                                                 </ErrorMsg>
                                         }
@@ -101,7 +101,7 @@ const SignupForm = () => {
                             <Input type="password" placeholder="Confirm Password" required onChange={onChangeConfirmPassword} value={confirmPassword} maxLength="15" />
                             {
                                 checkPasswordError ?
-                                    <ErrorMsg> password is different </ErrorMsg>
+                                    <ErrorMsg> ❗ password is different </ErrorMsg>
                                     :
                                     <ErrorMsg color="green">
                                         {
