@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { circle } from '../loading';
 export const Input = styled.input`
     display: block;
     padding:15px;
@@ -41,9 +42,19 @@ export const PurpleBtn = styled.button`
     padding: 15px;
     border-radius: 15px;
     transition: opacity 250ms ease-in-out;
-    :hover{
-       opacity: 0.9;
-    }
+    ${({ loading }) => loading === "true" && css`
+    opacity: 0.5;
+        ::after{
+            content:"";
+            display:inline-block;
+            margin-left:3px;
+            border :2px solid black;
+            border-radius :50%;
+            width : 8px;
+            height : 8px;
+            animation : ${circle} 1s linear forwards;
+        }        
+    `}
 `
 export const CircleBtn = styled.button`
     cursor: pointer;
