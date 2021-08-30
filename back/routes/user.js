@@ -6,7 +6,7 @@ module.exports = (pool) => {
         let sql = 'INSERT INTO userdata_tb VALUES (null,?,?,?,0)';
         let id = req.body.id;
         let password = req.body.password;
-        let name = req.body.name;
+        let name = req.body.nickname;
         let params = [id, password, name];
         pool.query(sql, params,
             (err, results, fields) => {
@@ -15,6 +15,7 @@ module.exports = (pool) => {
                     return next(arr);
                 }
                 console.log('Create account end: ' + results);
+                res.send({check:true});
             });
     });
 
@@ -23,15 +24,14 @@ module.exports = (pool) => {
         let id = req.body.userId;
         pool.query(sql, [id],
             (err, results) => {
-                if(err){
+                if (err) {
                     console.log(err);
                     return next(err);
                 }
-                if(results.length !== 0){
-                    res.send({check: true});
-                }
-                res.send({check: false});
+                if (results.length !== 0) res.send({ check: false });
+                else res.send({ check: true });
             });
 
     });
+    return router;
 }

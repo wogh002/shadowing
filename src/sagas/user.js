@@ -12,11 +12,11 @@ const signUpAPI = data => {
 }
 function* checkId(action) {
     try {
-        const result = yield call(checkIdAPI, action.data);
         yield delay(1000);
+        const result = yield call(checkIdAPI, action.data);
         yield put({
             type: CHECK_ID_SUCCESS,
-            data: result.data
+            data: result.data.check
             // id가 없다면 true , 있다면 false.
         });
     } catch (error) {
@@ -30,10 +30,9 @@ function* checkId(action) {
 function* signUp(action) {
     try {
         const result = yield call(signUpAPI, action.data);
-        yield delay(1000);
         yield put({
             type: SIGN_UP_SUCCESS,
-            data: result.data
+            data: result.data.check
         });
     } catch (error) {
         yield delay(1000);

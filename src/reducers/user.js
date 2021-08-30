@@ -44,7 +44,7 @@ const reducer = (state = initalState, action) => {
                 checkIdLoading: false,
                 checkIdDone: true,
                 //가입가능하면 true 중복된 아이디 있으면 false,
-                isCheckIdPass: true,
+                isCheckIdPass: action.data,
             }
         case CHECK_ID_FAILURE:
             return {
