@@ -64,7 +64,7 @@ const reducer = (state = initalState, action) => {
                 ...state,
                 signUpLoading: false,
                 // 회원가입 성공시 true 실패시 false
-                signUpDone: true,
+                signUpDone: action.data,
             }
         case SIGN_UP_FAILURE:
             return {
