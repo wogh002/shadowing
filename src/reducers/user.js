@@ -52,7 +52,26 @@ const reducer = (state = initalState, action) => {
                 checkIdLoading: false,
                 checkIdError: true,
             }
-
+        case SIGN_UP_REQUEST:
+            return {
+                ...state,
+                signUpLoading: true,
+                signUpDone: false,
+                signUpError: false,
+            }
+        case SIGN_UP_SUCCESS:
+            return {
+                ...state,
+                signUpLoading: false,
+                // 회원가입 성공시 true 실패시 false
+                signUpDone: true,
+            }
+        case SIGN_UP_FAILURE:
+            return {
+                ...state,
+                signUpLoading: false,
+                signUpError: true,
+            }
         default: return state;
     }
 }

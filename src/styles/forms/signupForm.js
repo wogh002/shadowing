@@ -1,4 +1,5 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
+import { circle } from '../loading';
 import { ErrorMessage } from "../error/style";
 export const Form = styled.form`
     padding: 50px;
@@ -23,6 +24,7 @@ export const Form = styled.form`
         button:last-child{
             width:100%;
         }
+       
     /* --- desktop --- */
     @media ${({ theme: { desktop } }) => desktop} {
         padding: 100px;
@@ -50,23 +52,6 @@ export const Form = styled.form`
         }
     }
 `
-const circle = keyframes`
-    0% {
-        opacity : 1;
-        border-color : #69c893;
-        transform: rotate(0deg);
-    }
-    50% {
-        opacity : 0.7;
-        border-color : #69c893;
-        transform: rotate(180deg);
-    }
-    100% {
-        opacity : 0.3;
-        border-color : #ccffcc;
-        transform: rotate(360deg);
-    }
-`
 export const Span = styled.span`
     position: absolute;
     top: 19px;
@@ -81,6 +66,7 @@ export const Span = styled.span`
         ::after{
             content:"";
             display:inline-block;
+            margin-left:3px;
             border :2px solid black;
             border-radius :50%;
             width : 10px;
