@@ -6,16 +6,16 @@ import { ThemeProvider } from "styled-components";
 import theme from "./styles/theme";
 import Routes from "./routes";
 import { Provider } from 'react-redux';
-import configureStore from './store/configureStore';
+import store from './store/configureStore';
 ReactDOM.render(
   <React.StrictMode>
     <GlobalStyle />
     <ThemeProvider theme={theme}>
-      <Routes>
-        <Provider store={configureStore}>
+      <Provider store={store}>
+        <Routes>
           <App />
-        </Provider>
-      </Routes>
+        </Routes>
+      </Provider>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')

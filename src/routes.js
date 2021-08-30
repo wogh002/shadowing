@@ -4,7 +4,7 @@ import {
     Switch,
     Route,
 } from 'react-router-dom';
-import SignupForm from "./pages/signupForm";
+import Signup from "./pages/signup";
 import App from "./app";
 const Routes = () => {
     return (
@@ -17,7 +17,7 @@ const Routes = () => {
                 <Route exact component={PageNotFound} />
           */}
                 <Route exact path="/" component={App} />
-                <Route exact path="/signup" component={SignupForm} />
+                <Route exact path="/signup" component={Signup} />
             </Switch>
         </BrowserRouter>
     )
