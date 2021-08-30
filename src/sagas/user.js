@@ -6,12 +6,12 @@ const checkIdAPI = (data) => {
 }
 function* checkId(action) {
     try {
-        // 동기 await 같은 느낌
         const result = yield call(checkIdAPI, action.data);
         yield delay(1000);
         yield put({
             type: CHECK_ID_SUCCESS,
-            data: action.data
+            data: result.data,
+            // data: action.data
         });
     } catch (error) {
         yield delay(1000);
