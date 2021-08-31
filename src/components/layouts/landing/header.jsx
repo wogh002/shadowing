@@ -16,7 +16,8 @@ const HeaderTag = styled.header`
         /* pc 드롭다운은 모바일에서 보이지 않게 설정*/
         display:none;
     }
-    & > img {
+    & button + a {
+        /* 이미지 */
         display:none;
     }
     /* --- desktop --- */
@@ -24,12 +25,11 @@ const HeaderTag = styled.header`
         border-bottom: 1px solid #e9ecef;
         justify-content: space-around;
         padding: 0;
-        & > img {
-            display: block;
-            cursor:pointer;
-        }
         & > button {
             display:none;
+        }
+        & button + a {
+            display: block;
         }
         & > ul {
             /* 드롭다운 menuItmes.jsx*/
@@ -56,8 +56,10 @@ const Header = () => {
                             <FontAwesomeIcon icon={faCaretDown} size="lg" />
                     }
                 </button>
-                {/* pc 일때만 보이는 menuItmes,IMAGE */}
-                <img src={logo} alt="logo" />
+                {/* pc 일때만 보이는 menuItmes,a */}
+                <Link to="/">
+                    <img src={logo} alt="logo" />
+                </Link>
                 <MenuItmes />
 
                 <Link to="/signup">
@@ -65,7 +67,7 @@ const Header = () => {
                         <button>Sign Up</button>
                     </UserInfoWrapper>
                 </Link>
-                
+
             </HeaderTag>
             {/* pc일 경우 드롭다운 보이지 않게 설정함 */}
             <DropDown open={open} setOpen={setOpen} />

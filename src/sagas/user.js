@@ -20,7 +20,6 @@ function* checkId(action) {
             // id가 없다면 true , 있다면 false.
         });
     } catch (error) {
-        yield delay(1000);
         yield put({
             type: CHECK_ID_FAILURE,
             data: error.response.data

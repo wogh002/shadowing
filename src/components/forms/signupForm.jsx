@@ -55,7 +55,8 @@ const SignupForm = () => {
     return (
         <>
             {
-                signUpDone ? <SignupSuccess /> :
+                signUpDone ? <SignupSuccess /> 
+                :
                     <Form onSubmit={onSubmit}>
                         <h1>Sign Up</h1>
                         <div>

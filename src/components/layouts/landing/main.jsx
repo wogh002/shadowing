@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom';
 const Main = () => {
     return (
         <MainTag>
-            <h1>Shadowing</h1>
+            <Link to="/">
+                <h1>Shadowing</h1>
+            </Link>
             <img src={illustration} alt="illustration" />
             <h2>what is Shadowing?</h2>
             <p>
