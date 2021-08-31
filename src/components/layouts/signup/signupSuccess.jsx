@@ -22,6 +22,7 @@ const SignupSuccessSection = styled.section`
         height: auto;
         margin-bottom: 25px;
         min-width : 235px;
+        max-width:500px;
     }
     p{
         font-size: 15px;
@@ -31,13 +32,35 @@ const SignupSuccessSection = styled.section`
         opacity: 0.8;
         white-space: nowrap;
     }
+     /* --- desktop --- */
+     @media ${({ theme: { desktop } }) => desktop} {
+        padding: 80px 60px 48px 60px;
+        h1 {
+            font-size: 25px;
+            margin-bottom : 25px;
+        }
+        img{
+            width: 35%;
+            min-width:400px;
+            margin-bottom: 35px;
+        }
+        p{
+            font-size: 20px;
+            margin-bottom: 36px;
+        }
+    }
 `
 const LoginButton = styled(PinkBtn)`
     margin:0 auto;
     font-size: 13px;
-    width :90%;
+    width :80%;
     padding: 10px;
     min-width: 190px;
+      /* --- desktop --- */
+    @media ${({ theme: { desktop } }) => desktop} {
+        font-size: 17px;
+        width :30%;
+    }
 `
 const SignupSuccess = () => {
     return (
