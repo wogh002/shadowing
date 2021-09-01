@@ -35,7 +35,7 @@ module.exports = (pool) => {
 
     });
 
-    router.post('/login', (res, req, next) => {
+    router.post('/login', (req, res, next) => {
         passport.authenticate('local', (err, user, info) => {
             if (err) {
                 console.error(err);
@@ -50,6 +50,12 @@ module.exports = (pool) => {
             });
         })(req, res, next);
     });
+
+    router.poser('/logout', (req, res) => {
+        req.logout();
+        req.session.destroy();
+        res.send('ok');
+    })
 
     return router;
 }
