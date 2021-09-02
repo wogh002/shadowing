@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { circle } from '../loading';
+import { ErrorMessage } from "../error/style";
 export const Input = styled.input`
     display: block;
     padding:15px;
@@ -69,5 +70,40 @@ export const CircleBtn = styled.button`
     :hover{
         opacity: 1;
         background-color: #424242;
+    }
+`
+export const Span = styled.span`
+    position: absolute;
+    top: 19px;
+    right: -50px;
+    cursor: pointer;
+    letter-spacing: -0.05em;
+    color: #FF3399;
+    font-weight:700;
+    transition: all 250ms ease-in-out;
+    ${({ loading }) => loading === "true" && css`
+    opacity: 0.5;
+        ::after{
+            content:"";
+            display:inline-block;
+            margin-left:3px;
+            border :2px solid black;
+            border-radius :50%;
+            width : 10px;
+            height : 10px;
+            animation : ${circle} 1s linear forwards;
+        }        
+    `}
+    @media ${({ theme: { desktop } }) => desktop} {
+        font-size: 19px;
+    }
+`
+
+export const ErrorMsg = styled(ErrorMessage)`
+    top:-20px;
+    left:15px;
+    @media ${({ theme: { desktop } }) => desktop} {
+        min-width:320px;
+        font-size: 14px;
     }
 `

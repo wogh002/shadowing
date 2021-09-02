@@ -1,13 +1,36 @@
 import styled from 'styled-components';
-export const MainTag = styled.main`    
+export const MainTag = styled.main`
     padding:40px;
     border-bottom: 1px solid #e9ecef;
-    & h1 {
-        font-size : 25px;
+    div {
+        display: flex;
+        min-width:215px;
+        align-items: center;
+        justify-content: space-around;
+        margin-bottom: 45px;
+    }
+    div h1 {
+        font-size : 20px;
         font-weight:700;
         cursor: pointer;
-        margin-bottom: 45px;
         letter-spacing: -0.05em;
+        color : black;
+        min-width: 180px;
+        opacity: 0.8;
+        transition: opacity 250ms ease-in-out;
+        :hover{
+            opacity: 1;
+        }
+    }
+    div span {
+        font-size : 20px;
+        font-weight:700;
+        color:black;
+        opacity: 0.8;
+        transition: opacity 250ms ease-in-out;
+        :hover{
+            opacity: 1;
+        }
     }
     & img {
         display:block;
@@ -36,12 +59,13 @@ export const MainTag = styled.main`
         letter-spacing: -0.02em;
         min-width:193px;
     }
+  
     & button {
         display:block;
+        font-size: 15px;
         letter-spacing: -0.02em;
-        width : 70%;
-        max-width : 220px;
-        min-width: 140px;
+        width : 60%;
+        min-width: 180px;
         margin: 0 auto;
         color : #FF3399;
         font-weight : 700;
@@ -58,8 +82,8 @@ export const MainTag = styled.main`
      /* --- desktop --- */
     @media ${({ theme: { desktop } }) => desktop} {
         padding:70px 210px;
-        & h1 {
-            font-size : 30px;
+        div h1 {
+            font-size : 25px;
         }
         & img {
             max-width : 460px;
@@ -69,6 +93,11 @@ export const MainTag = styled.main`
         }
         & p {
             font-size : 16px;
+        }
+        & button {
+            font-size: 20px;
+            letter-spacing: -0.03em;
+            width : 60%;
         }
     }
 `
