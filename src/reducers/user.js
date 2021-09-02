@@ -7,17 +7,36 @@ export const SIGN_UP_REQUEST = "SIGN_UP_REQUEST";
 export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS";
 export const SIGN_UP_FAILURE = "SIGN_UP_FAILURE";
 
+export const LOGIN_REQUEST = "LOGIN_REQUEST";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAILURE = "LOGIN_FAILURE";
+
+export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
+export const LOGOUT_FAILURE = "LOGOUT_FAILURE";
+
 export const checkIdRequestAction = (data) => ({ type: CHECK_ID_REQUEST, data });
+const dummyUserInfo = (data) => ({
+    //더미데이터의 data 에는 userId, password 로 가정.
+    ...data,
+    id: 1,
+    nickname: "민수 털보찡",
+})
 const initalState = {
-    id: 1, //DB ID
     me: null,
-    signUpLoading: false,//회원가입 시도중
-    signUpDone: false,
-    signUpError: false,
     checkIdLoading: false, //중복 체크 시도중
     checkIdDone: false,
     checkIdError: false,
     isCheckIdPass: false, //중복id 있는지 없는지
+    signUpLoading: false,//회원가입 시도중
+    signUpDone: false,
+    signUpError: false,
+    logInLoading: false,//로그인 시도중
+    logInDone: false,
+    logInError: false,
+    logOutLoading: false, //로그아웃 시도중
+    logOutDone: false,
+    logOutError: false,
 }
 //이전 상태를 최신 상태로 교체
 const reducer = (state = initalState, action) => {
@@ -50,7 +69,7 @@ const reducer = (state = initalState, action) => {
             return {
                 ...state,
                 checkIdLoading: false,
-                checkIdError: true,
+                checkIdError: action.error,
             }
         case SIGN_UP_REQUEST:
             return {
@@ -70,8 +89,49 @@ const reducer = (state = initalState, action) => {
             return {
                 ...state,
                 signUpLoading: false,
-                signUpError: true,
+                signUpError: action.error,
             }
+        case LOGIN_REQUEST:
+            return {
+                ...state,
+                logInLoading: true,
+                logInDone: false,
+                logInError: false,
+            }
+        case LOGIN_SUCCESS:
+            return {
+                ...state,
+                me: dummyUserInfo(action.data),
+                logInLoading: false,
+                logInDone: true,
+            }
+        case LOGIN_FAILURE:
+            return {
+                ...state,
+                logInLoading: false,
+                logInError: action.error,
+            }
+        case LOGOUT_REQUEST:
+            return {
+                ...state,
+                logOutLoading: true,
+                logOutDone: false,
+                logOutError: false,
+            }
+        case LOGOUT_SUCCESS:
+            return {
+                ...state,
+                me: null,
+                logOutLoading: false,
+                logOutDone: true,
+            }
+        case LOGOUT_FAILURE:
+            return {
+                ...state,
+                logOutLoading: false,
+                logOutError: action.error,
+            }
+
         default: return state;
     }
 }
