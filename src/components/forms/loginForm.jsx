@@ -6,7 +6,7 @@ import useInput from '../../hooks/useInput';
 import { LOGIN_REQUEST } from '../../reducers/user';
 import { useHistory } from 'react-router-dom';
 const LoginForm = () => {
-    const { logInLoading, logInDone } = useSelector(({ user }) => user);
+    const { logInLoading, logInDone, logInError } = useSelector(({ user }) => user);
     const history = useHistory();
     const dispatch = useDispatch();
     const [id, setId] = useInput('');
@@ -26,6 +26,10 @@ const LoginForm = () => {
     useEffect(() => {
         logInDone && history.push('/');
     }, [logInDone, history]);
+    // useEffect(()=>{
+    //     // 돔에 장착된 이후로.
+    //     // logInDone &&  
+    // },[]);
 
     return (
         <Form onSubmit={onSubmit}>
@@ -46,6 +50,10 @@ const LoginForm = () => {
                 onChange={setPassword}
                 value={password}
             />
+            {
+                logInError &&
+                <ErrorMsg>logInError</ErrorMsg>
+            }
             <PurpleBtn type="submit" loading={logInLoading.toString()}>
                 Login
             </PurpleBtn>

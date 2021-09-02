@@ -16,12 +16,12 @@ export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const LOGOUT_FAILURE = "LOGOUT_FAILURE";
 
 export const checkIdRequestAction = (data) => ({ type: CHECK_ID_REQUEST, data });
-const dummyUserInfo = (data) => ({
-    //더미데이터의 data 에는 userId, password 로 가정.
-    ...data,
-    id: 1,
-    nickname: "민수 털보찡",
-})
+// const dummyUserInfo = (data) => ({
+//     //더미데이터의 data 에는 userId, password 로 가정.
+//     ...data,
+//     id: 1,
+//     nickname: "민수 털보찡",
+// })
 const initalState = {
     me: null,
     checkIdLoading: false, //중복 체크 시도중
@@ -38,6 +38,7 @@ const initalState = {
     logOutDone: false,
     logOutError: false,
 }
+
 //이전 상태를 최신 상태로 교체
 const reducer = (state = initalState, action) => {
     switch (action.type) {
@@ -62,13 +63,15 @@ const reducer = (state = initalState, action) => {
                 ...state,
                 checkIdLoading: false,
                 checkIdDone: true,
-                //가입가능하면 true 중복된 아이디 있으면 false,
-                isCheckIdPass: action.data,
+                isCheckIdPass: true,
+                 //가입가능하면 true 중복된 아이디 있으면 false,
             }
         case CHECK_ID_FAILURE:
             return {
                 ...state,
+                checkIdDone: true,
                 checkIdLoading: false,
+                isCheckIdPass: false,
                 checkIdError: action.error,
             }
         case SIGN_UP_REQUEST:
@@ -83,7 +86,7 @@ const reducer = (state = initalState, action) => {
                 ...state,
                 signUpLoading: false,
                 // 회원가입 성공시 true 실패시 false
-                signUpDone: action.data,
+                signUpDone: true,
             }
         case SIGN_UP_FAILURE:
             return {
@@ -101,7 +104,7 @@ const reducer = (state = initalState, action) => {
         case LOGIN_SUCCESS:
             return {
                 ...state,
-                me: dummyUserInfo(action.data),
+                me: action.data,
                 logInLoading: false,
                 logInDone: true,
             }

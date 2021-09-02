@@ -14,7 +14,7 @@ const SignupForm = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [checkPasswordError, setCheckPasswordError] = useState(false);
-    const { checkIdLoading, checkIdDone, isCheckIdPass, signUpLoading, signUpDone, signUpError } = useSelector(({ user }) => user);
+    const { checkIdLoading, checkIdDone, isCheckIdPass, checkIdError, signUpLoading, signUpDone, signUpError } = useSelector(({ user }) => user);
     const dispatch = useDispatch();
     const onCheckId = useCallback(() => {
         clickedCheckId = id;
@@ -87,7 +87,7 @@ const SignupForm = () => {
                                             isCheckIdPass ?
                                                 <ErrorMsg color="green"> Good ID 👍</ErrorMsg>
                                                 :
-                                                <ErrorMsg>❗ Duplicate. you have to use other id</ErrorMsg>
+                                                <ErrorMsg>❗ {checkIdError}</ErrorMsg>
                                         }
                                     </>
                                     :

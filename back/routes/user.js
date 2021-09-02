@@ -29,7 +29,7 @@ module.exports = (pool) => {
                     console.log(err);
                     return next(err);
                 }
-                if (results.length === 0) res.status(403).send('해당 아이디가 이미 DB에 있습니다.');
+                if (results.length !== 0) res.status(403).send('해당 아이디가 이미 DB에 있습니다.');
                 else res.send("해당 아이디가 중복되지 않습니다.");
             });
 
@@ -51,7 +51,7 @@ module.exports = (pool) => {
         })(req, res, next);
     });
 
-    router.poser('/logout', (req, res) => {
+    router.post('/logout', (req, res) => {
         req.logout();
         req.session.destroy();
         res.send('ok');

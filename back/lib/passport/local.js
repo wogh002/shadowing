@@ -1,8 +1,7 @@
 const passport = require('passport');
 const { Strategy: LocalStrategy } = require("passport-local");
-
 module.exports = (pool) => {
-    passport.use(new LocalStrategy({
+    passport.use('local' , new LocalStrategy({
         usernameField: 'userId',
         passwordField: 'password'
     }, (user_id, user_pwd, done) => {
