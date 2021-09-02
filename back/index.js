@@ -1,11 +1,22 @@
 const express = require('express');
 const cors = require('cors');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}));
+app.use(cookieParser('key'));
+app.use(session({
+  saveUninitialized: false,
+	resave: false,
+	secret: 'key',
+}));
 
 const pool = require('./lib/db');
 

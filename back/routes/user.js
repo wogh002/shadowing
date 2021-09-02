@@ -1,4 +1,5 @@
 const express = require('express')
+const passport = require('passport');
 const router = express.Router();
 
 module.exports = (pool) => {
@@ -15,7 +16,7 @@ module.exports = (pool) => {
                     return next(arr);
                 }
                 console.log('Create account end: ' + results);
-                res.send({check:true});
+                res.send("계정 생성 완료");
             });
     });
 
@@ -28,10 +29,33 @@ module.exports = (pool) => {
                     console.log(err);
                     return next(err);
                 }
-                if (results.length !== 0) res.send({ check: false });
-                else res.send({ check: true });
+                if (results.length === 0) res.status(403).send('해당 아이디가 이미 DB에 있습니다.');
+                else res.send("해당 아이디가 중복되지 않습니다.");
             });
 
     });
+
+    router.post('/login', (req, res, next) => {
+        passport.authenticate('local', (err, user, info) => {
+            if (err) {
+                console.error(err);
+                return next(err);
+            }
+            if (info) {
+                return res.status(403).send(info.message);
+            }
+            return req.login(user, async (loginErr) => {
+                if (loginErr) { return next(loginErr); }
+                return res.json(user);
+            });
+        })(req, res, next);
+    });
+
+    router.poser('/logout', (req, res) => {
+        req.logout();
+        req.session.destroy();
+        res.send('ok');
+    })
+
     return router;
 }
