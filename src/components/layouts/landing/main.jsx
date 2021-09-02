@@ -11,10 +11,10 @@ const Main = () => {
                 <Link to="/">
                     <h1>
                         {
-                            !me ?
-                                "Shadowing"
-                                :
+                            me ?
                                 `Hello 🌼 ${me.nickname}`
+                                :
+                                "Shadowing"
                         }
                     </h1>
                 </Link>
@@ -34,13 +34,13 @@ const Main = () => {
                 JUST TRUST THIS APP ! 💕
             </p>
             {
-                !me ?
-                    <Link to="/signup">
-                        <button>Sign Up</button>
-                    </Link>
-                    :
+                me ?
                     <Link to="/video/shadowing">
                         <button>Enjoy Shadowing</button>
+                    </Link>
+                    :
+                    <Link to="/signup">
+                        <button>Sign Up</button>
                     </Link>
             }
 

@@ -1,3 +1,7 @@
+export const LOAD_USER_REQUEST = "LOAD_USER_REQUEST";
+export const LOAD_USER_SUCCESS = "LOAD_USER_SUCCESS";
+export const LOAD_USER_FAILURE = "LOAD_USER_FAILURE";
+
 export const CHECK_ID_RESET = "CHECK_ID_RESET";
 export const CHECK_ID_REQUEST = "CHECK_ID_REQUEST";
 export const CHECK_ID_SUCCESS = "CHECK_ID_SUCCESS";
@@ -16,14 +20,11 @@ export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const LOGOUT_FAILURE = "LOGOUT_FAILURE";
 
 export const checkIdRequestAction = (data) => ({ type: CHECK_ID_REQUEST, data });
-// const dummyUserInfo = (data) => ({
-//     //더미데이터의 data 에는 userId, password 로 가정.
-//     ...data,
-//     id: 1,
-//     nickname: "민수 털보찡",
-// })
 const initalState = {
     me: null,
+    loadUserLoading: false,
+    loadUserDone: false,
+    loadUserError: false,
     checkIdLoading: false, //중복 체크 시도중
     checkIdDone: false,
     checkIdError: false,
@@ -42,6 +43,26 @@ const initalState = {
 //이전 상태를 최신 상태로 교체
 const reducer = (state = initalState, action) => {
     switch (action.type) {
+        case LOAD_USER_REQUEST:
+            return {
+                ...state,
+                loadUserLoading: true,
+                loadUserDone: false,
+                loadUserError: false,
+            }
+        case LOAD_USER_SUCCESS:
+            return {
+                ...state,
+                me: action.data,
+                loadUserLoading: false,
+                loadUserDone: true,
+            }
+        case LOAD_USER_FAILURE:
+            return {
+                ...state,
+                loadUserLoading: false,
+                loadUserError: action.error,
+            }
         case CHECK_ID_RESET:
             return {
                 ...state,
@@ -62,9 +83,9 @@ const reducer = (state = initalState, action) => {
             return {
                 ...state,
                 checkIdLoading: false,
-                checkIdDone: true,
+                checkIdDone: true, //id check 했으면 true
                 isCheckIdPass: true,
-                 //가입가능하면 true 중복된 아이디 있으면 false,
+                //가입가능하면 true 중복된 아이디 있으면 false,
             }
         case CHECK_ID_FAILURE:
             return {

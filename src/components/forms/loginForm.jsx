@@ -11,8 +11,6 @@ const LoginForm = () => {
     const dispatch = useDispatch();
     const [id, setId] = useInput('');
     const [password, setPassword] = useInput('');
-    //2.로그인 성공시 me에는 객체 (유저정보가 담긴다)
-    //4.로그인 실패시 에러메세지를 서버에서 남겨준다. 팝업을 띄워서 해보자.
     const onSubmit = useCallback((e) => {
         e.preventDefault();
         dispatch({
@@ -26,11 +24,6 @@ const LoginForm = () => {
     useEffect(() => {
         logInDone && history.push('/');
     }, [logInDone, history]);
-    // useEffect(()=>{
-    //     // 돔에 장착된 이후로.
-    //     // logInDone &&  
-    // },[]);
-
     return (
         <Form onSubmit={onSubmit}>
             <h1>Login</h1>
@@ -42,18 +35,20 @@ const LoginForm = () => {
                 onChange={setId}
                 value={id}
             />
-            <Input
-                type="password"
-                placeholder="Enter Password"
-                required
-                maxLength="15"
-                onChange={setPassword}
-                value={password}
-            />
-            {
-                logInError &&
-                <ErrorMsg>logInError</ErrorMsg>
-            }
+            <div>
+                <Input
+                    type="password"
+                    placeholder="Enter Password"
+                    required
+                    maxLength="15"
+                    onChange={setPassword}
+                    value={password}
+                />
+                {
+                    logInError &&
+                    <ErrorMsg>{logInError}</ErrorMsg>
+                }
+            </div>
             <PurpleBtn type="submit" loading={logInLoading.toString()}>
                 Login
             </PurpleBtn>

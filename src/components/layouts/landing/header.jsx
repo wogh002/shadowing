@@ -34,16 +34,16 @@ const Header = () => {
                 <MenuItmes />
                 <UserInfoWrapper>
                     {
-                        !me ?
-                            <Link to="/signup">
-                                <button>
-                                    Sign Up
-                                </button>
-                            </Link>
-                            :
+                        me ?
                             <Link to="/" onClick={onLogOut}>
                                 <button>
                                     Logout
+                                </button>
+                            </Link>
+                            :
+                            <Link to="/signup">
+                                <button>
+                                    Sign Up
                                 </button>
                             </Link>
                     }

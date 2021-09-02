@@ -1,6 +1,9 @@
 import { all, fork, put, delay, takeLatest, call } from 'redux-saga/effects';
 import {
     CHECK_ID_FAILURE, CHECK_ID_REQUEST, CHECK_ID_SUCCESS,
+    LOAD_USER_FAILURE,
+    LOAD_USER_REQUEST,
+    LOAD_USER_SUCCESS,
     LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS,
     LOGOUT_FAILURE,
     LOGOUT_REQUEST,
@@ -11,7 +14,6 @@ import axios from '../service/axios';
 const checkIdAPI = (data) => {
     return axios.post('/user/checkId', data);
 }
-
 const signUpAPI = data => {
     return axios.post('/user/join', data);
 }
@@ -19,7 +21,10 @@ const logInAPI = data => {
     return axios.post('/user/login', data);
 }
 const logOutAPI = () => {
-    return axios.post('/user/logout');
+    return axios.get('/user/logout');
+}
+const loadUserAPI = () => {
+    return axios.get('/user/loadUser');
 }
 function* checkId(action) {
     try {
@@ -27,8 +32,6 @@ function* checkId(action) {
         yield call(checkIdAPI, action.data);
         yield put({
             type: CHECK_ID_SUCCESS,
-            // data: result.data.check
-            // id가 없다면 true , 있다면 false.
         });
     } catch (error) {
         console.log(error.response.data);
@@ -44,11 +47,9 @@ function* signUp(action) {
         yield put({
             type: SIGN_UP_SUCCESS,
             data: result.data.check
-            // 
         });
     } catch (error) {
         yield put({
-            // id 중복시 에러 "문자열임"
             type: SIGN_UP_FAILURE,
             error: error.response.data
         })
@@ -58,7 +59,6 @@ function* logIn(action) {
     //action.data 에는 {id,pw}
     try {
         const result = yield call(logInAPI, action.data);
-        console.log(result);
         yield delay(1000);
         yield put({
             type: LOGIN_SUCCESS,
@@ -86,6 +86,21 @@ function* logOut() {
         })
     }
 }
+function* loadUser() {
+    try {
+        const result = yield call(loadUserAPI);
+        yield put({
+            type: LOAD_USER_SUCCESS,
+            data: result.data,
+        });
+    } catch (error) {
+        yield put({
+            type: LOAD_USER_FAILURE,
+            error: error.response.data
+        })
+    }
+}
+
 function* watchCheckId() {
     yield takeLatest(CHECK_ID_REQUEST, checkId);
 }
@@ -98,11 +113,15 @@ function* watchLogIn() {
 function* watchLogOut() {
     yield takeLatest(LOGOUT_REQUEST, logOut);
 }
+function* watchLoadUser() {
+    yield takeLatest(LOAD_USER_REQUEST, loadUser);
+}
 export default function* userSaga() {
     yield all([
         fork(watchCheckId),
         fork(watchSignUp),
         fork(watchLogIn),
         fork(watchLogOut),
+        fork(watchLoadUser),
     ])
 }
