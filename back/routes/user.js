@@ -3,6 +3,23 @@ const passport = require('passport');
 const router = express.Router();
 
 module.exports = (pool) => {
+
+    router.get('/', (req,res,next)=>{
+        if(!req.user){
+            return res.status(200).json(null);
+        }
+        console.log(req.user);
+        let sql = 'SELECT uid as id, user_id as userId, user_pwd as userPwd, user_nm as nickname FROM userdata_tb WHERE user_id=?';
+        pool.query(sql, [req.user.id],
+            (err, rows, fields)=>{
+                if(err){
+                    console.log(err);
+                    return next(err);
+                }
+                res.status(200).json(rows[0]);
+            });
+    });
+
     router.post('/join', (req, res, next) => {
         let sql = 'INSERT INTO userdata_tb VALUES (null,?,?,?,0)';
         let id = req.body.id;
@@ -42,6 +59,7 @@ module.exports = (pool) => {
                 return next(err);
             }
             if (info) {
+                console.log(info.message);
                 return res.status(403).send(info.message);
             }
             return req.login(user, async (loginErr) => {
@@ -51,7 +69,7 @@ module.exports = (pool) => {
         })(req, res, next);
     });
 
-    router.post('/logout', (req, res) => {
+    router.post('/get', (req, res) => {
         req.logout();
         req.session.destroy();
         res.send('ok');

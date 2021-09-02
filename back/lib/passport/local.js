@@ -1,7 +1,8 @@
 const passport = require('passport');
 const { Strategy: LocalStrategy } = require("passport-local");
 module.exports = (pool) => {
-    passport.use('local' , new LocalStrategy({
+    console.log('start local');
+    passport.use(new LocalStrategy({
         usernameField: 'userId',
         passwordField: 'password'
     }, (user_id, user_pwd, done) => {
@@ -12,7 +13,7 @@ module.exports = (pool) => {
                     console.log(err);
                     return done(err);
                 }
-                if (!rows) {
+                if (rows.length === 0) {
                     return done(null, false, { message: '존재하지 않는 사용자입니다.' });
                 }
                 let user = rows[0];
