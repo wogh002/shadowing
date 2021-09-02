@@ -1,9 +1,7 @@
 const express = require('express')
 const passport = require('passport');
 const router = express.Router();
-
 module.exports = (pool) => {
-
     router.get('/', (req,res,next)=>{
         if(!req.user){
             return res.status(200).json(null);
@@ -69,7 +67,7 @@ module.exports = (pool) => {
         })(req, res, next);
     });
 
-    router.post('/get', (req, res) => {
+    router.get('/logout', (req, res) => {
         req.logout();
         req.session.destroy();
         res.send('ok');

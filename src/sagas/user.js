@@ -80,6 +80,7 @@ function* logOut() {
             type: LOGOUT_SUCCESS,
         });
     } catch (error) {
+        console.log(error);
         yield put({
             type: LOGOUT_FAILURE,
             error: error.response.data
