@@ -1,12 +1,15 @@
+import React from 'react';
 import Header from '../components/layouts/landing/header';
 import Footer from '../components/layouts/landing/footer';
-import SignupForm from '../components/forms/signupForm';
-const Signup = () => (
+import LoginForm from '../components/forms/loginForm';
+const Login = () => (
     <>
         <Header />
-        <SignupForm />
+        <LoginForm />
         <Footer />
     </>
 );
 
-export default Signup;
+
+
+export default Login;
