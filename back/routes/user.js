@@ -2,15 +2,15 @@ const express = require('express')
 const passport = require('passport');
 const router = express.Router();
 module.exports = (pool) => {
-    router.get('/', (req,res,next)=>{
-        if(!req.user){
+    router.get('/loadUser', (req, res, next) => {
+        if (!req.user) {
             return res.status(200).json(null);
         }
         console.log(req.user);
         let sql = 'SELECT uid as id, user_id as userId, user_pwd as userPwd, user_nm as nickname FROM userdata_tb WHERE user_id=?';
         pool.query(sql, [req.user.id],
-            (err, rows, fields)=>{
-                if(err){
+            (err, rows, fields) => {
+                if (err) {
                     console.log(err);
                     return next(err);
                 }
