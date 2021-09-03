@@ -90,6 +90,7 @@ function* logOut() {
 function* loadUser() {
     try {
         const result = yield call(loadUserAPI);
+        console.log(result);
         yield put({
             type: LOAD_USER_SUCCESS,
             data: result.data,
