@@ -7,15 +7,7 @@ module.exports = (pool) => {
             return res.status(200).json(null);
         }
         console.log(req.user);
-        let sql = 'SELECT uid as id, user_id as userId, user_pwd as userPwd, user_nm as nickname FROM userdata_tb WHERE user_id=?';
-        pool.query(sql, [req.user.id],
-            (err, rows, fields) => {
-                if (err) {
-                    console.log(err);
-                    return next(err);
-                }
-                res.status(200).json(rows[0]);
-            });
+        res.status(200).json(req.user);
     });
 
     router.post('/join', (req, res, next) => {
