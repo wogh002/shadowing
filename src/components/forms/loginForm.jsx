@@ -1,6 +1,6 @@
 import { React, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Input, PurpleBtn, Span, ErrorMsg } from '../../styles/formElements/style';
+import { Input, PurpleBtn, ErrorMsg } from '../../styles/formElements/style';
 import { Form } from '../../styles/forms/loginForm';
 import useInput from '../../hooks/useInput';
 import { LOGIN_REQUEST } from '../../reducers/user';

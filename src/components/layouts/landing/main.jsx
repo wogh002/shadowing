@@ -24,7 +24,6 @@ const Main = () => {
                         <span>LogIn</span>
                     </Link>
                 }
-
             </div>
             <img src={illustration} alt="illustration" />
             <h2>what is Shadowing?</h2>
@@ -35,7 +34,7 @@ const Main = () => {
             </p>
             {
                 me ?
-                    <Link to="/video/shadowing">
+                    <Link to="/shadowing">
                         <button>Enjoy Shadowing</button>
                     </Link>
                     :
