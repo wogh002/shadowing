@@ -1,24 +1,19 @@
 export const LOAD_USER_REQUEST = "LOAD_USER_REQUEST";
 export const LOAD_USER_SUCCESS = "LOAD_USER_SUCCESS";
 export const LOAD_USER_FAILURE = "LOAD_USER_FAILURE";
-
 export const CHECK_ID_RESET = "CHECK_ID_RESET";
 export const CHECK_ID_REQUEST = "CHECK_ID_REQUEST";
 export const CHECK_ID_SUCCESS = "CHECK_ID_SUCCESS";
 export const CHECK_ID_FAILURE = "CHECK_ID_FAILURE";
-
 export const SIGN_UP_REQUEST = "SIGN_UP_REQUEST";
 export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS";
 export const SIGN_UP_FAILURE = "SIGN_UP_FAILURE";
-
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
-
 export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const LOGOUT_FAILURE = "LOGOUT_FAILURE";
-
 export const checkIdRequestAction = (data) => ({ type: CHECK_ID_REQUEST, data });
 const initalState = {
     me: null,
@@ -29,18 +24,16 @@ const initalState = {
     checkIdDone: false,
     checkIdError: false,
     isCheckIdPass: false, //중복id 있는지 없는지
-    signUpLoading: false,//회원가입 시도중
+    signUpLoading: false,
     signUpDone: false,
     signUpError: false,
-    logInLoading: false,//로그인 시도중
+    logInLoading: false,
     logInDone: false,
     logInError: false,
-    logOutLoading: false, //로그아웃 시도중
+    logOutLoading: false,
     logOutDone: false,
     logOutError: false,
 }
-
-//이전 상태를 최신 상태로 교체
 const reducer = (state = initalState, action) => {
     switch (action.type) {
         case LOAD_USER_REQUEST:
@@ -85,7 +78,6 @@ const reducer = (state = initalState, action) => {
                 checkIdLoading: false,
                 checkIdDone: true, //id check 했으면 true
                 isCheckIdPass: true,
-                //가입가능하면 true 중복된 아이디 있으면 false,
             }
         case CHECK_ID_FAILURE:
             return {
@@ -106,7 +98,6 @@ const reducer = (state = initalState, action) => {
             return {
                 ...state,
                 signUpLoading: false,
-                // 회원가입 성공시 true 실패시 false
                 signUpDone: true,
             }
         case SIGN_UP_FAILURE:
@@ -156,7 +147,6 @@ const reducer = (state = initalState, action) => {
                 logOutLoading: false,
                 logOutError: action.error,
             }
-
         default: return state;
     }
 }

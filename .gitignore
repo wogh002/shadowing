@@ -25,6 +25,9 @@
 .env.test.local
 .env.production.local
 
+#YOUTUBE API KEY
+.env
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

@@ -6,9 +6,9 @@ import { useDispatch } from 'react-redux';
 import { LOAD_USER_REQUEST } from './reducers/user';
 function App() {
   const dispatch = useDispatch();
-  useEffect(() => { //새로고침 할때마다 && '/' 경로 유입 될 때마다LOAD_USER 
+  useEffect(() => {
     dispatch({ type: LOAD_USER_REQUEST });
-  }, []);
+  }, [dispatch]);
   return (
     <>
       <Header />
