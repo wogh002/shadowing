@@ -8,7 +8,7 @@ const loadVideoAPI = () => {
         params: {
             part: 'snippet',
             maxResults: 2,
-            playlistId: 'PL3sjBeY9l6eBglNrW3dH9doWdu8foy6Q3'
+            playlistId: 'PL3sjBeY9l6eBglNrW3dH9doWdu8foy6Q3',
         }
     })
 }
