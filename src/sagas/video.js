@@ -7,7 +7,7 @@ const loadVideoAPI = () => {
     return axios.get('/playlistItems', {
         params: {
             part: 'snippet',
-            maxResults: 2,
+            maxResults: 1,
             playlistId: 'PL3sjBeY9l6eBglNrW3dH9doWdu8foy6Q3',
         }
     })
@@ -16,13 +16,11 @@ function* loadVideo() {
     try {
         // call  === await
         const result = yield call(loadVideoAPI);
-        console.log(result);
         yield put({
             type: LOAD_VIDEO_SUCCESS,
-            data: result.data,
+            data: result.data.items,
         });
     } catch (error) {
-        console.log(error.response.data);
         yield put({
             type: LOAD_VIDEO_FAILURE,
             error: error.response.data
