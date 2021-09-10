@@ -15,6 +15,16 @@ export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const LOGOUT_FAILURE = "LOGOUT_FAILURE";
 export const checkIdRequestAction = (data) => ({ type: CHECK_ID_REQUEST, data });
+//me 에 있는 프로퍼티들
+// id: 7
+// nickname: "재호"
+// userId: "ekem159"
+// userPwd: "123"
+// userVideo :  {
+//  curIndex : 1,
+//  videoId : 'sdfcxzxcvxcz',
+//}
+
 const initalState = {
     me: null,
     loadUserLoading: false,
