@@ -52,11 +52,6 @@ const SignupForm = () => {
             }
         })
     }, [id, nickname, password, checkIdDone, isCheckIdPass, checkPasswordError, dispatch]);
-    // useEffect(()=>{
-    //      if(signUpDone) {
-    //      Router.push('/');
-    //}
-    //},[signUpDone])
     useEffect(() => {
         signUpError && alert(signUpError);
     }, [signUpError]);

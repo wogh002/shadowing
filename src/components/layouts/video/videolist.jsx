@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LOAD_VIDEO_REQUEST } from '../../../reducers/video';
 import VideoItem from './videoItem';
 import VideoDetail from './videodetail';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 const Section = styled.section`
     display: flex;
     flex-direction: column;
@@ -22,6 +22,15 @@ const Section = styled.section`
         ul{
             width: 15%;
         }
+        ${({ display }) => display === "true" && css`
+        /* selectedVideo 없다면 */
+            ul {
+                flex-direction: row;
+                flex-wrap:wrap;
+                justify-content: center;
+                width: 100%;
+            }
+        `}
     }
 `
 const Videolist = () => {
@@ -34,14 +43,18 @@ const Videolist = () => {
     } = useSelector(({ videoReducer }) => videoReducer);
     useEffect(() => dispatch({ type: LOAD_VIDEO_REQUEST }), [dispatch]);
     return (
-        <Section>
+        <Section display={(!selectedVideo).toString()}>
             {
                 selectedVideo && <VideoDetail videoInfo={videoInfo} />
             }
             <ul>
                 {
                     loadVideoDone &&
-                    videos.map(video => <VideoItem video={video} key={video.id} />)
+                    videos.map(video => <VideoItem
+                        video={video}
+                        key={video.id}
+                        display={(!selectedVideo).toString()}
+                    />)
                 }
             </ul>
         </Section>

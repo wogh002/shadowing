@@ -1,5 +1,5 @@
 import React, { useCallback, memo } from 'react';
-import styled from 'styled-components';
+import styled,{css} from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { LOAD_SCRIPT_REQUEST } from '../../../reducers/video';
 const ListItem = styled.li`
@@ -20,9 +20,14 @@ const ListItem = styled.li`
         div h1 {
             font-size : 15px;
         }
+        ${({ display }) => display === "true" && css`
+          /* selected video 가 없다면 */
+            width: 20%;
+            margin : 0 12px 15px 0;
+        `}
     }
 `
-const VideoItem = memo(({ video }) => {
+const VideoItem = memo(({ video, display }) => {
     const { thumbnails, title, resourceId: { videoId } } = video.snippet;
     const dispatch = useDispatch();
     const onShowVideo = useCallback(() => {
@@ -30,11 +35,11 @@ const VideoItem = memo(({ video }) => {
             type: LOAD_SCRIPT_REQUEST,
             data: { videoId },
         });
-    }, [dispatch]);
+    }, [dispatch,videoId]);
     return (
-        <ListItem onClick={onShowVideo}>
+        <ListItem onClick={onShowVideo} display={display}>
             <div>
-                <img src={thumbnails.medium.url} />
+                <img src={thumbnails.medium.url} alt="thumbnail"/>
                 <h1>{title}</h1>
             </div>
         </ListItem>
