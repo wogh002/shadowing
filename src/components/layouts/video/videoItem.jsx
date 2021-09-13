@@ -1,5 +1,5 @@
-import React, { useCallback, memo } from 'react';
-import styled,{css} from 'styled-components';
+import React, { memo } from 'react';
+import styled, { css } from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { LOAD_SCRIPT_REQUEST } from '../../../reducers/video';
 const ListItem = styled.li`
@@ -30,16 +30,16 @@ const ListItem = styled.li`
 const VideoItem = memo(({ video, display }) => {
     const { thumbnails, title, resourceId: { videoId } } = video.snippet;
     const dispatch = useDispatch();
-    const onShowVideo = useCallback(() => {
+    const onShowVideo = () => {
         dispatch({
             type: LOAD_SCRIPT_REQUEST,
             data: { videoId },
         });
-    }, [dispatch,videoId]);
+    }
     return (
         <ListItem onClick={onShowVideo} display={display}>
             <div>
-                <img src={thumbnails.medium.url} alt="thumbnail"/>
+                <img src={thumbnails.medium.url} alt="thumbnail" />
                 <h1>{title}</h1>
             </div>
         </ListItem>
