@@ -33,7 +33,7 @@ const VideoItem = memo(({ video, display }) => {
     const onShowVideo = () => {
         dispatch({
             type: LOAD_SCRIPT_REQUEST,
-            data: { videoId },
+            data: videoId,
         });
     }
     return (

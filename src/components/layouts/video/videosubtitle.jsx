@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import Script from './script';
+
 const Section = styled.section`
     border:  1px solid #e0e1e6;
     padding: 25px;
@@ -29,18 +31,19 @@ const Section = styled.section`
     }
 `
 const VideoSubTitle = ({ videoInfo }) => {
-    console.log(videoInfo);
     return (
         <Section>
             <h1>SCRIPT</h1>
-                {/* dl 에다 스크롤 */}
             <dl>
-                {/* 반복문 돌려야함 div부터 */}
-                {/* videoInfo.captions.map(video => <div> </div> ) */}
-                <div>
-                    <dt>00:12</dt>
-                    <dd>i have confidenc!!!!!!!!!you can do this</dd>
-                </div>
+                {
+                    videoInfo.captions.map((item, index) =>
+                        <Script
+                            key={index}
+                            curIndex={index}
+                            selectedIndex={videoInfo.selectedIndex}
+                            item={item}
+                        />)
+                }
             </dl>
         </Section>
     )

@@ -1,6 +1,14 @@
 import { all, fork, put, delay, takeLatest, call } from 'redux-saga/effects';
 import {
-    LOAD_VIDEO_REQUEST, LOAD_VIDEO_SUCCESS, LOAD_VIDEO_FAILURE, LOAD_SCRIPT_REQUEST, LOAD_SCRIPT_SUCCESS, LOAD_SCRIPT_FAILURE
+    LOAD_VIDEO_REQUEST,
+    LOAD_VIDEO_SUCCESS,
+    LOAD_VIDEO_FAILURE,
+    LOAD_SCRIPT_REQUEST,
+    LOAD_SCRIPT_SUCCESS,
+    LOAD_SCRIPT_FAILURE,
+    SEND_CURRENT_INDEX_REQUEST,
+    SEND_CURRENT_INDEX_SUCCESS,
+    SEND_CURRENT_INDEX_FAILURE
 } from '../reducers/video';
 import youtube from '../service/youtube/axios';
 import axios from '../service/axios';
@@ -13,14 +21,16 @@ const loadVideoAPI = () => {
         }
     })
 }
-// const loadScriptAPI = data => {
-//     return axios.post('/video/loadscript', data);
-// }
+const loadScriptAPI = (data) => {
+    return axios.get(`/video/loadscript/${data}`);
+}
+//const loadCurIndexAPI = data => {
+//  return axios.post('/video/loadCurIndex',data);
+//}
 function* loadVideo() {
     try {
         // call  === await
         const result = yield call(loadVideoAPI);
-        console.log(result);
         yield put({
             type: LOAD_VIDEO_SUCCESS,
             data: result.data.items,
@@ -33,17 +43,30 @@ function* loadVideo() {
     }
 }
 function* loadScript(action) {
-    // action.data => {videoId : "X7LtWe8FXkc"}; "qw0_BhMRP-M"
-    console.log(action.data);
     try {
-        // const result = yield call(loadScriptAPI, action.data);
+        const result = yield call(loadScriptAPI, action.data);
         yield put({
             type: LOAD_SCRIPT_SUCCESS,
-            // data: result.data
+            data: result.data
         });
     } catch (error) {
         yield put({
             type: LOAD_SCRIPT_FAILURE,
+            error: error.response.data
+        })
+    }
+}
+function* loadCurIndex(action) {
+    try {
+        // const result = yield call(loadCurIndexAPI, action.data);
+        yield put({
+            type: SEND_CURRENT_INDEX_SUCCESS,
+            data: action.data.curIndex,
+            // data: result.data
+        });
+    } catch (error) {
+        yield put({
+            type: SEND_CURRENT_INDEX_FAILURE,
             error: error.response.data
         })
     }
@@ -54,9 +77,13 @@ function* watchLoadVideo() {
 function* watchLoadScript() {
     yield takeLatest(LOAD_SCRIPT_REQUEST, loadScript);
 }
+function* watchLoadCurIndex() {
+    yield takeLatest(SEND_CURRENT_INDEX_REQUEST, loadCurIndex);
+}
 export default function* videoSaga() {
     yield all([
         fork(watchLoadVideo),
         fork(watchLoadScript),
+        fork(watchLoadCurIndex),
     ])
 }

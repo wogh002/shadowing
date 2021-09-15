@@ -11,7 +11,8 @@ router.get('/loadscript/:videoID', async (req, res, next) => {
     if (!enCaptionTrack)
         return res.status(404).send();
 
-    const captions = await getCaptions(videoId, enCaptionTrack);
+    let captions = await getCaptions(vid, enCaptionTrack);
+    captions = captions.slice(0,10);
 
     const data = {
         videoId: vid,

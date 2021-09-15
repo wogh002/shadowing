@@ -32,19 +32,11 @@ const IframeContainer = styled.div`
   }
 `
 const VideoDetail = ({ videoInfo }) => {
+  
   return (
     <Div>
       <IframeContainer>
-        {/* <iframe
-          title="superVideo"
-          id="ytplayer"
-          type="text/html"
-          width="640"
-          height="360"
-          src={`https://www.youtube.com/embed/${videoInfo.videoId}?autoplay=1&playlist=${videoInfo.videoId}&loop=1&start=30`}
-          frameBorder="0"
-        /> */}
-        <Iframe  videoInfo={videoInfo} src="https://www.youtube.com/embed/"/>
+        <Iframe  videoInfo={videoInfo}/>
       </IframeContainer>
       <h1>
         DON'T SAY THAT <br />

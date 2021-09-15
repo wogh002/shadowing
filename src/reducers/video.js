@@ -10,28 +10,22 @@ export const LOAD_SCRIPT_FAILURE = "LOAD_SCRIPT_FAILURE";
 export const SEND_CURRENT_INDEX_REQUEST = "SEND_CURRENT_INDEX_REQUEST";
 export const SEND_CURRENT_INDEX_SUCCESS = "SEND_CURRENT_INDEX_SUCCESS";
 export const SEND_CURRENT_INDEX_FAILURE = "SEND_CURRENT_INDEX_FAILURE";
-// 무한스크롤 할 때  default 대사10개  20개 30 ...60 등등
+// 내가 인덱스 하나줘야됌 (무한스크롤 ,스크롤 아래로 내렸을때 true, 위로 올렸을 때 false)
 export const LOAD_USER_SCRIPT_REQUEST = "LOAD_USER_SCRIPT_REQUEST";
 export const LOAD_USER_SCRIPT_SUCCESS = "LOAD_USER_SCRIPT_SUCCESS";
 export const LOAD_USER_SCRIPT_FAILURE = "LOAD_USER_SCRIPT_FAILURE";
 
-const dummyVideo = () => ({
-    videoId: 'qw0_BhMRP-M',
-    curIndex: 0,
-    captions: [
-        { //curIndex : 0
-            script: '달리십쇼 형님',
-            start: 5,
-            dur: 3,
-        },
-        {
-            //curIndex : 1
-            script: '오냐 달릴게!!',
-            start: 15,
-            dur: 3,
-        },
-    ],
-});
+// const dummyVideo = () => ({
+//     videoId: 'qw0_BhMRP-M',
+//     selectedIndex: 0,
+//     captions: [
+//         {
+//             text: '달리십쇼 형님',
+//             start: 0,
+//             duration: 2,
+//         },
+//     ],
+// });
 
 const initalState = {
     videos: null,
@@ -44,6 +38,10 @@ const initalState = {
     loadScriptLoading: false,
     loadScriptDone: false,
     loadScriptError: false,
+
+    sendIndexDone: false,
+    sendIndexError: false,
+
 }
 const reducer = (state = initalState, action) => {
     switch (action.type) {
@@ -77,23 +75,46 @@ const reducer = (state = initalState, action) => {
             }
         case LOAD_SCRIPT_SUCCESS:
             return {
-                //민수보고 videoCaptions 에 video ID도 같이 넣어달라하자 
                 ...state,
                 loadScriptLoading: false,
                 loadScriptDone: true,
-                videoInfo: dummyVideo(),
+                videoInfo: action.data,
                 selectedVideo: true,
             }
         case LOAD_SCRIPT_FAILURE:
             return {
                 ...state,
                 loadScriptLoading: false,
-                loadScriptDone: false,
                 loadScriptError: action.error,
             }
+        case SEND_CURRENT_INDEX_REQUEST:
+            return {
+                ...state,
+                sendIndexDone: false,
+                sendIndexError: false,
+            }
+        case SEND_CURRENT_INDEX_SUCCESS:
+            return {
+                ...state,
+                sendIndexDone: true,
+                videoInfo: {
+                    ...state.videoInfo,
+                    selectedIndex: action.data,
+                }
+            }
+        case SEND_CURRENT_INDEX_FAILURE:
+            return {
+                ...state,
+                sendIndexError: action.error
+            }
+
         default: return state;
     }
-
+    // videoInfo: {
+    //     videoId: action.data.videoId,
+    //     selectedIndex: action.data.selectedIndex,
+    //     captions: [...state.videoInfo.captions, ...action.data.captions]
+    // }
 }
 export default reducer;
 
