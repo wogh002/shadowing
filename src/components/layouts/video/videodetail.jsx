@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import VideoSubTitle from './videosubtitle';
 import Iframe from './iframe';
@@ -31,12 +31,11 @@ const IframeContainer = styled.div`
     height : 100%;
   }
 `
-const VideoDetail = ({ videoInfo }) => {
-  
+const VideoDetail = memo(({ videoInfo }) => {
   return (
     <Div>
       <IframeContainer>
-        <Iframe  videoInfo={videoInfo}/>
+        <Iframe videoInfo={videoInfo} />
       </IframeContainer>
       <h1>
         DON'T SAY THAT <br />
@@ -47,6 +46,7 @@ const VideoDetail = ({ videoInfo }) => {
       <VideoSubTitle videoInfo={videoInfo} />
     </Div>
   )
-}
+});
+
 
 export default VideoDetail;

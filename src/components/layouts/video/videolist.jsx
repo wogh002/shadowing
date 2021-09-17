@@ -38,14 +38,13 @@ const Videolist = () => {
     const {
         videos,
         loadVideoDone,
-        selectedVideo,
         videoInfo
     } = useSelector(({ videoReducer }) => videoReducer);
     useEffect(() => dispatch({ type: LOAD_VIDEO_REQUEST }), [dispatch]);
     return (
-        <Section display={(!selectedVideo).toString()}>
+        <Section display={(!videoInfo).toString()}>
             {
-                selectedVideo && <VideoDetail videoInfo={videoInfo} />
+                videoInfo && <VideoDetail videoInfo={videoInfo} />
             }
             <ul>
                 {
@@ -53,7 +52,7 @@ const Videolist = () => {
                     videos.map(video => <VideoItem
                         video={video}
                         key={video.id}
-                        display={(!selectedVideo).toString()}
+                        display={(!videoInfo).toString()}
                     />)
                 }
             </ul>

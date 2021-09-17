@@ -34,7 +34,6 @@ const initalState = {
     loadVideoError: false,
 
     videoInfo: null,
-    selectedVideo: false,
     loadScriptLoading: false,
     loadScriptDone: false,
     loadScriptError: false,
@@ -71,7 +70,6 @@ const reducer = (state = initalState, action) => {
                 loadScriptLoading: true,
                 loadScriptDone: false,
                 loadScriptError: false,
-                selectedVideo: false,
             }
         case LOAD_SCRIPT_SUCCESS:
             return {
@@ -79,7 +77,6 @@ const reducer = (state = initalState, action) => {
                 loadScriptLoading: false,
                 loadScriptDone: true,
                 videoInfo: action.data,
-                selectedVideo: true,
             }
         case LOAD_SCRIPT_FAILURE:
             return {
@@ -114,6 +111,7 @@ const reducer = (state = initalState, action) => {
     //     videoId: action.data.videoId,
     //     selectedIndex: action.data.selectedIndex,
     //     captions: [...state.videoInfo.captions, ...action.data.captions]
+    //      captions :  true ? [] : []
     // }
 }
 export default reducer;
