@@ -4,7 +4,7 @@ import VideoSubTitle from './videosubtitle';
 import Iframe from './iframe';
 const Div = styled.div`
 margin-bottom: 25px;
-  h1 {
+  & > h1 {
         font-size : 13px;
         font-weight: 700;
         letter-spacing: -0.02em;
@@ -15,6 +15,9 @@ margin-bottom: 25px;
     @media ${({ theme: { desktop } }) => desktop} {
       margin-bottom: 0;
       width: 55%;
+      & > h1 {
+        font-size : 16px;
+      }
     }
 `
 const IframeContainer = styled.div`

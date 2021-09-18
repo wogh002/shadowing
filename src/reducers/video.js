@@ -1,12 +1,11 @@
 export const LOAD_VIDEO_REQUEST = "LOAD_VIDEO_REQUEST";
 export const LOAD_VIDEO_SUCCESS = "LOAD_VIDEO_SUCCESS";
 export const LOAD_VIDEO_FAILURE = "LOAD_VIDEO_FAILURE";
-// selected 된 video 있을때  video_id 넘겨주자
+
 export const LOAD_SCRIPT_REQUEST = "LOAD_SCRIPT_REQUEST";
 export const LOAD_SCRIPT_SUCCESS = "LOAD_SCRIPT_SUCCESS";
 export const LOAD_SCRIPT_FAILURE = "LOAD_SCRIPT_FAILURE";
-// 유저가 스크립트 대사 클릭 했을 경우 curIndex 값 넘겨줘야함
-//넘겨주면 서버에서 videoInfo 꾸며서 나에게 응답.
+
 export const SEND_CURRENT_INDEX_REQUEST = "SEND_CURRENT_INDEX_REQUEST";
 export const SEND_CURRENT_INDEX_SUCCESS = "SEND_CURRENT_INDEX_SUCCESS";
 export const SEND_CURRENT_INDEX_FAILURE = "SEND_CURRENT_INDEX_FAILURE";
