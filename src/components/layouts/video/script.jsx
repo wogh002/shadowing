@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { SEND_CURRENT_INDEX_REQUEST } from '../../../reducers/video';
+import { CURRENT_INDEX_REQUEST } from '../../../reducers/video';
 const HOUR_SECONDS = 3600;
 const MINUTE_SECONDS = 60;
 const TEN_SECONDS = 10;
@@ -25,29 +25,29 @@ const Div = styled.div`
         opacity: 0.9;
     `}
 `
+const getTime = (SEC) => {
+    //1 % 3  1을 3으로 나누면 몫은 0 나머지는 1
+    const MIN =
+        parseInt((SEC % HOUR_SECONDS) / MINUTE_SECONDS) < TEN_SECONDS ?
+            CHARACTER_0 + parseInt((SEC % HOUR_SECONDS) / MINUTE_SECONDS)
+            :
+            parseInt((SEC % HOUR_SECONDS) / MINUTE_SECONDS);
+    const SECOND =
+        SEC % MINUTE_SECONDS < TEN_SECONDS ?
+            CHARACTER_0 + SEC % MINUTE_SECONDS
+            :
+            SEC % MINUTE_SECONDS;
+    return MIN + ":" + SECOND;
+}
 const Script = ({ item, selectedIndex, curIndex }) => {
     const dispatch = useDispatch();
     const START_SEC = Math.floor(item.start);
     const onClick = () => {
         dispatch({
-            type: SEND_CURRENT_INDEX_REQUEST,
+            type: CURRENT_INDEX_REQUEST,
             data: { curIndex }
         });
     };
-    const getTime = (SEC) => {
-        //1 % 3  1을 3으로 나누면 몫은 0 나머지는 1
-        const MIN =
-            parseInt((SEC % HOUR_SECONDS) / MINUTE_SECONDS) < TEN_SECONDS ?
-                CHARACTER_0 + parseInt((SEC % HOUR_SECONDS) / MINUTE_SECONDS)
-                :
-                parseInt((SEC % HOUR_SECONDS) / MINUTE_SECONDS);
-        const SECOND =
-            SEC % MINUTE_SECONDS < TEN_SECONDS ?
-                CHARACTER_0 + SEC % MINUTE_SECONDS
-                :
-                SEC % MINUTE_SECONDS;
-        return MIN + ":" + SECOND;
-    }
     return (
         <Div color={selectedIndex === curIndex ? "true" : "false"}>
             <dt>{getTime(START_SEC)}</dt>

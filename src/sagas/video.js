@@ -6,9 +6,9 @@ import {
     LOAD_SCRIPT_REQUEST,
     LOAD_SCRIPT_SUCCESS,
     LOAD_SCRIPT_FAILURE,
-    SEND_CURRENT_INDEX_REQUEST,
-    SEND_CURRENT_INDEX_SUCCESS,
-    SEND_CURRENT_INDEX_FAILURE
+    CURRENT_INDEX_REQUEST,
+    CURRENT_INDEX_SUCCESS,
+    CURRENT_INDEX_FAILURE
 } from '../reducers/video';
 import youtube from '../service/youtube/axios';
 import axios from '../service/axios';
@@ -60,13 +60,13 @@ function* loadCurIndex(action) {
     try {
         // const result = yield call(loadCurIndexAPI, action.data);
         yield put({
-            type: SEND_CURRENT_INDEX_SUCCESS,
+            type: CURRENT_INDEX_SUCCESS,
             data: action.data.curIndex,
             // data: result.data
         });
     } catch (error) {
         yield put({
-            type: SEND_CURRENT_INDEX_FAILURE,
+            type: CURRENT_INDEX_FAILURE,
             error: error.response.data
         })
     }
@@ -78,7 +78,7 @@ function* watchLoadScript() {
     yield takeLatest(LOAD_SCRIPT_REQUEST, loadScript);
 }
 function* watchLoadCurIndex() {
-    yield takeLatest(SEND_CURRENT_INDEX_REQUEST, loadCurIndex);
+    yield takeLatest(CURRENT_INDEX_REQUEST, loadCurIndex);
 }
 export default function* videoSaga() {
     yield all([
