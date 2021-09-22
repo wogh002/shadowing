@@ -24,9 +24,11 @@ const loadVideoAPI = () => {
 const loadScriptAPI = (data) => {
     return axios.get(`/video/loadscript/${data}`);
 }
-//const loadCurIndexAPI = data => {
-//  return axios.post('/video/loadCurIndex',data);
-//}
+
+const loadCurIndexAPI = data => {
+ return axios.post('/video/loadCurIndex',data);
+}
+
 function* loadVideo() {
     try {
         // call  === await
@@ -61,7 +63,7 @@ function* loadCurIndex(action) {
         const result = yield call(loadCurIndexAPI, action.data);
         yield put({
             type: CURRENT_INDEX_SUCCESS,
-            data: result.data
+            data: result.data.curIndex
         });
     } catch (error) {
         yield put({

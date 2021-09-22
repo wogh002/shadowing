@@ -12,21 +12,20 @@ router.get('/loadscript/:videoID', async (req, res, next) => {
         return res.status(404).send();
 
     let captions = await getCaptions(vid, enCaptionTrack);
-    captions = captions.slice(0,10);
+    captions = captions.slice(0, 10);
 
     const data = {
         videoId: vid,
         selectedIndex: 0,
         captions
     };
-
     res.send(data);
-    
+
 });
 
-router.post('/loadCurIndex', (req,res,next) => {
+router.post('/loadCurIndex', (req, res, next) => {
     let curIndex = req.body.curIndex;
-    return res.send(curIndex);
+    return res.status(200).json({ curIndex });
 });
 
 module.exports = router;
