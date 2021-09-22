@@ -39,13 +39,13 @@ const getTime = (SEC) => {
             SEC % MINUTE_SECONDS;
     return MIN + ":" + SECOND;
 }
-const Script = ({ item, selectedIndex, curIndex }) => {
+const Script = ({ videoId, item, selectedIndex, curIndex }) => {
     const dispatch = useDispatch();
     const START_SEC = Math.floor(item.start);
     const onClick = () => {
         dispatch({
             type: CURRENT_INDEX_REQUEST,
-            data: { curIndex }
+            data: { curIndex, videoId }
         });
     };
     return (
