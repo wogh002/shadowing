@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import useInput from '../../hooks/useInput';
 import { checkIdRequestAction, SIGN_UP_REQUEST, CHECK_ID_RESET } from '../../reducers/user';
 import { Input, PurpleBtn, Span, ErrorMsg } from '../../styles/formElements/style';
-import { Form } from "../../styles/forms/signupform";
-import SignupSuccess from '../layouts/signup/signupsuccess';
+import { Form } from "../../styles/forms/signupForm";
+import SignupSuccess from '../layouts/signup/signupSuccess';
 // 첫글자는 반드시 영문소문자, 영문소문자 a-z 숫자 0 ~ 9 까지 허용/  5~15자 이하로 이루어지고, 숫자가 하나 이상 포함되어야한다.
 const ID_REG = /^[a-z][a-z\d]{4,14}$/;
 let clickedCheckId = undefined;
