@@ -30,9 +30,9 @@ app.use(passport.session());
 
 //라우팅 설정
 var userRouter = require('./routes/user')(pool);
-
+var videoRouter = require('./routes/video');
 app.use('/user', userRouter);
-
+app.use('/video', videoRouter);
 
 // 에러 페이지 처리
 app.use(function (req, res, next) {
