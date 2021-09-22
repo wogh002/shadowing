@@ -34,6 +34,7 @@ const VideoSubTitle = ({ videoInfo }) => {
                 {
                     videoInfo.captions.map((item, index) =>
                         <Script
+                            videoId={videoInfo.videoId}
                             key={index}
                             curIndex={index}
                             selectedIndex={videoInfo.selectedIndex}
