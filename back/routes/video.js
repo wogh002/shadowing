@@ -24,4 +24,9 @@ router.get('/loadscript/:videoID', async (req, res, next) => {
     
 });
 
+router.post('/loadCurIndex', (req,res,next) => {
+    let curIndex = req.body.curIndex;
+    return res.send(curIndex);
+});
+
 module.exports = router;
