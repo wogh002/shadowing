@@ -58,11 +58,10 @@ function* loadScript(action) {
 }
 function* loadCurIndex(action) {
     try {
-        // const result = yield call(loadCurIndexAPI, action.data);
+        const result = yield call(loadCurIndexAPI, action.data);
         yield put({
             type: CURRENT_INDEX_SUCCESS,
-            data: action.data.curIndex,
-            // data: result.data
+            data: result.data
         });
     } catch (error) {
         yield put({
