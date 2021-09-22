@@ -1,7 +1,7 @@
 import { React, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Input, PurpleBtn, ErrorMsg } from '../../styles/formElements/style';
-import { Form } from '../../styles/forms/loginform';
+import { Form } from '../../styles/forms/loginForm';
 import useInput from '../../hooks/useInput';
 import { LOGIN_REQUEST } from '../../reducers/user';
 import { useHistory } from 'react-router-dom';

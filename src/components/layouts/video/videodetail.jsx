@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import VideoSubTitle from './videosubtitle';
 import Iframe from './iframe';
 const Div = styled.div`
 margin-bottom: 25px;
-  h1 {
+  & > h1 {
         font-size : 13px;
         font-weight: 700;
         letter-spacing: -0.02em;
@@ -15,6 +15,9 @@ margin-bottom: 25px;
     @media ${({ theme: { desktop } }) => desktop} {
       margin-bottom: 0;
       width: 55%;
+      & > h1 {
+        font-size : 16px;
+      }
     }
 `
 const IframeContainer = styled.div`
@@ -31,12 +34,11 @@ const IframeContainer = styled.div`
     height : 100%;
   }
 `
-const VideoDetail = ({ videoInfo }) => {
-  
+const VideoDetail = memo(({ videoInfo }) => {
   return (
     <Div>
       <IframeContainer>
-        <Iframe  videoInfo={videoInfo}/>
+        <Iframe videoInfo={videoInfo} />
       </IframeContainer>
       <h1>
         DON'T SAY THAT <br />
@@ -47,6 +49,7 @@ const VideoDetail = ({ videoInfo }) => {
       <VideoSubTitle videoInfo={videoInfo} />
     </Div>
   )
-}
+});
+
 
 export default VideoDetail;
