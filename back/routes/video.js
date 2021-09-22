@@ -3,29 +3,35 @@ const router = express.Router();
 const path = require('path');
 const { getCaptions, getTracks } = require('@os-team/youtube-captions');
 
-router.get('/loadscript/:videoID', async (req, res, next) => {
-    const vid = path.parse(req.params.videoID).base;
-    const captionTracks = await getTracks(vid);
+module.exports = (pool) => {
+    router.get('/loadscript/:uid/:videoID', async (req, res, next) => {
+        const uid = path.parse(req.params.uid).base;
+        const vid = path.parse(req.params.videoID).base;
 
-    const enCaptionTrack = captionTracks.find((item) => item.langCode === 'en');
-    if (!enCaptionTrack)
-        return res.status(404).send();
+        const captionTracks = await getTracks(vid);
 
-    let captions = await getCaptions(vid, enCaptionTrack);
-    captions = captions.slice(0, 10);
+        const enCaptionTrack = captionTracks.find((item) => item.langCode === 'en');
+        if (!enCaptionTrack)
+            return res.status(404).send();
 
-    const data = {
-        videoId: vid,
-        selectedIndex: 0,
-        captions
-    };
-    res.send(data);
+        let captions = await getCaptions(vid, enCaptionTrack);
+        captions = captions.slice(0, 10);
 
-});
+        // TODO: DB에서 selectedIndex 불러오기
+        const data = {
+            videoId: vid,
+            selectedIndex: 0,
+            captions
+        };
+        res.send(data);
+    });
 
-router.post('/loadCurIndex', (req, res, next) => {
-    let curIndex = req.body.curIndex;
-    return res.status(200).json({ curIndex });
-});
+    router.post('/loadCurIndex', (req, res, next) => {
+        let uid = req.body.uid;
+        let curIndex = req.body.curIndex;
+        // TODO: DB에 curIndex 저장 후 리턴
+        return res.status(200).json({ curIndex });
+    });
 
-module.exports = router;
+    return router;
+}
