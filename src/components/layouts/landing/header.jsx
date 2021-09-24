@@ -48,8 +48,6 @@ const Header = () => {
                             </Link>
                     }
                 </UserInfoWrapper>
-
-
             </HeaderTag>
             {/* pc일 경우 드롭다운 보이지 않게 설정함 */}
             <DropDown open={open} setOpen={setOpen} />

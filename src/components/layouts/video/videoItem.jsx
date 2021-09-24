@@ -34,6 +34,7 @@ const VideoItem = memo(({ video, display }) => {
         dispatch({
             type: LOAD_SCRIPT_REQUEST,
             data: videoId,
+            // me에서 db id도 전달해줘야함.
         });
     }
     return (

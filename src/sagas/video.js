@@ -8,7 +8,10 @@ import {
     LOAD_SCRIPT_FAILURE,
     CURRENT_INDEX_REQUEST,
     CURRENT_INDEX_SUCCESS,
-    CURRENT_INDEX_FAILURE
+    CURRENT_INDEX_FAILURE,
+    SCROLL_SCRIPT_SUCCESS,
+    SCROLL_SCRIPT_REQUEST,
+    SCROLL_SCRIPT_FAILURE
 } from '../reducers/video';
 import youtube from '../service/youtube/axios';
 import axios from '../service/axios';
@@ -22,11 +25,14 @@ const loadVideoAPI = () => {
     })
 }
 const loadScriptAPI = (data) => {
+    //me에 있는 db id도 넘겨주자
+    //그러면 서버에서 videoInfo 의 프로퍼티들에게 값을 넣어준다. 
+    //위로다섯 아래로 넷 
     return axios.get(`/video/loadscript/${data}`);
 }
 
 const loadCurIndexAPI = data => {
- return axios.post('/video/loadCurIndex',data);
+    return axios.post('/video/loadCurIndex', data);
 }
 
 function* loadVideo() {
@@ -47,6 +53,7 @@ function* loadVideo() {
 function* loadScript(action) {
     try {
         const result = yield call(loadScriptAPI, action.data);
+        console.log(result.data);
         yield put({
             type: LOAD_SCRIPT_SUCCESS,
             data: result.data
@@ -72,6 +79,22 @@ function* loadCurIndex(action) {
         })
     }
 }
+function* loadScrollScript(action) {
+    try {
+        // const result = yield call(loadScrollScriptAPI, action.data);
+        yield put({
+            type: SCROLL_SCRIPT_SUCCESS,
+            data: action.data,
+            // data: result.data.curIndex
+        });
+    } catch (error) {
+        yield put({
+            type: SCROLL_SCRIPT_FAILURE,
+            error: error.response.data
+        })
+    }
+}
+
 function* watchLoadVideo() {
     yield takeLatest(LOAD_VIDEO_REQUEST, loadVideo);
 }
@@ -81,10 +104,14 @@ function* watchLoadScript() {
 function* watchLoadCurIndex() {
     yield takeLatest(CURRENT_INDEX_REQUEST, loadCurIndex);
 }
+function* watchScrollScript() {
+    yield takeLatest(SCROLL_SCRIPT_REQUEST, loadScrollScript);
+}
 export default function* videoSaga() {
     yield all([
         fork(watchLoadVideo),
         fork(watchLoadScript),
         fork(watchLoadCurIndex),
+        fork(watchScrollScript),
     ])
 }
