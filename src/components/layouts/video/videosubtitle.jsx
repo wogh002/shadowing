@@ -29,26 +29,58 @@ const Section = styled.section`
     }
 `
 const VideoSubTitle = ({ videoInfo }) => {
+    //1.스크립트 로딩시 처음 스크립트를 위로 올렸을 때만 무한스크롤 되지 않게 해야된다.
+    const DISTANCE = 250;
     const target = useRef();
+    const belowDirectionTarget = useRef();
+    const aboveDirectionTarget = useRef();
     const dispatch = useDispatch();
     const lastIndex = videoInfo.captions.length - 1;
+    console.log(`lastIndex : ${lastIndex}`);
     useEffect(() => {
         const io = new IntersectionObserver(([{ isIntersecting }]) => {
             isIntersecting && dispatch({
                 type: SCROLL_SCRIPT_REQUEST,
-                lastIndex,
-                scrollDirection: isIntersecting,
+                data: {
+                    lastIndex,
+                    scrollDirection: isIntersecting,
+                }
             })
         }, {
             threshold: 0.7
         });
-        io.observe(target.current);
-        return () => io && io.disconnect(target)
+        io.observe(belowDirectionTarget.current);
+        return () => io && io.disconnect(belowDirectionTarget)
     }, [lastIndex, dispatch]);
+
+    useEffect(() => {
+        // 첫번째 인덱스가 보이면 바로 함수종료 시키자 (무한스크롤 요청 되지 않게)
+        if (videoInfo.selectedIndex < 6) {
+            return false;
+        }
+        const io = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting) {
+                dispatch({
+                    type: SCROLL_SCRIPT_REQUEST,
+                    data: {
+                        scrollDirection: false,
+                    }
+                })
+                target.current.scrollTop = DISTANCE;
+            }
+        }, {
+            threshold: 1
+        });
+        io.observe(aboveDirectionTarget.current);
+        return () => io && io.disconnect(aboveDirectionTarget);
+    }, [dispatch, videoInfo, target]);
+
     return (
         <Section>
             <h1>SCRIPT</h1>
-            <dl>
+            <dl ref={target}>
+                <div ref={aboveDirectionTarget}>
+                </div>
                 {
                     videoInfo.captions.map((item, index) =>
                         <Script
@@ -59,10 +91,10 @@ const VideoSubTitle = ({ videoInfo }) => {
                             item={item}
                         />)
                 }
-                <div ref={target}>
+                <div ref={belowDirectionTarget}>
                 </div>
             </dl>
-        </Section>
+        </Section >
     )
 }
 export default VideoSubTitle;

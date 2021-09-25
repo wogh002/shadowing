@@ -179,24 +179,21 @@ const reducer = (state = initalState, action) => {
                 ...state,
                 scrollScriptLoading: false,
                 scrollScriptDone: true,
-                // videoInfo: {
-                //     ...state.videoInfo,
-                //     captions: state.scrollDirection ?
-                //         [...state.videoInfo.captions, ...action.data.captions]
-                //         :
-                //         [...action.data, ...state.videoInfo.captions]
-                // }
                 videoInfo: {
                     ...state.videoInfo,
-                    captions: [...state.videoInfo.captions, ...dummyCaptions]
+                    captions: action.data.scrollDirection
+                        ?
+                        [...state.videoInfo.captions, ...dummyCaptions]
+                        :
+                        [...dummyCaptions, ...state.videoInfo.captions]
                 }
             }
-            case SCROLL_SCRIPT_FAILURE:
-                return {
-                    ...state,
-                    scrollScriptLoading: false,
-                    scrollScriptError: action.error,
-                }
+        case SCROLL_SCRIPT_FAILURE:
+            return {
+                ...state,
+                scrollScriptLoading: false,
+                scrollScriptError: action.error,
+            }
         default: return state;
     }
 }
