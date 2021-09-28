@@ -3,6 +3,12 @@ const router = express.Router();
 const path = require('path');
 const { getCaptions, getTracks } = require('@os-team/youtube-captions');
 
+function insertCapIdx(captions){
+    for(var i =0;i<captions.length;i++){
+        captions[i]['curIndex']=i;
+    }
+}
+
 module.exports = (pool) => {
     router.get('/loadscript/:uid/:videoId', (req, res, next) => {
         console.log('loadscript');
@@ -34,7 +40,8 @@ module.exports = (pool) => {
                 return res.status(404).send();
 
             let captions = await getCaptions(videoId, enCaptionTrack);
-            captions = captions.slice(0, 10);
+            insertCapIdx(captions);
+            captions = captions.slice(selectedIndex, selectedIndex+10);
 
             // TODO: DB에서 selectedIndex 불러오기
             const data = {
@@ -61,7 +68,9 @@ module.exports = (pool) => {
         const enCaptionTrack = captionTracks.find((item) => item.langCode === 'en');
         if (!enCaptionTrack)
             return res.status(404).send();
+
         let captions = await getCaptions(videoId, enCaptionTrack);
+        insertCapIdx(captions);
 
         if (isLower) {
             if (captions.length < end) end = captions.length;
