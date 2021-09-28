@@ -1,4 +1,4 @@
-import { all, fork, put, delay, takeLatest, call } from 'redux-saga/effects';
+import { all, fork, put, takeLatest, call } from 'redux-saga/effects';
 import {
     LOAD_VIDEO_REQUEST,
     LOAD_VIDEO_SUCCESS,
@@ -25,10 +25,8 @@ const loadVideoAPI = () => {
     })
 }
 const loadScriptAPI = (data) => {
-    //me에 있는 db id도 넘겨주자
-    //그러면 서버에서 videoInfo 의 프로퍼티들에게 값을 넣어준다. 
-    //위로다섯 아래로 넷 
-    return axios.get(`/video/loadscript/${data}`);
+    //TODO : 서버에게 데이터 요청 (id,videoId). 전달해야됌.
+    return axios.get(`/video/loadscript/${data.id}/${data.videoId}`);
 }
 
 const loadCurIndexAPI = data => {
