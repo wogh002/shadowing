@@ -3,9 +3,9 @@ const router = express.Router();
 const path = require('path');
 const { getCaptions, getTracks } = require('@os-team/youtube-captions');
 
-function insertCapIdx(captions){
-    for(var i =0;i<captions.length;i++){
-        captions[i]['curIndex']=i;
+function insertCapIdx(captions) {
+    for (var i = 0; i < captions.length; i++) {
+        captions[i]['curIndex'] = i;
     }
 }
 
@@ -42,14 +42,14 @@ module.exports = (pool) => {
             let captions = await getCaptions(videoId, enCaptionTrack);
             insertCapIdx(captions);
             const maxlen = captions.length;
-            
-            captions = captions.slice(selectedIndex, selectedIndex+10);
+
+            captions = captions.slice(selectedIndex, selectedIndex + 10);
 
             // TODO: DB에서 selectedIndex 불러오기
             const data = {
                 videoId,
                 selectedIndex,
-                endIndex: maxlen,
+                endIndex: maxlen-1,
                 captions
             };
             res.send(data);
@@ -59,7 +59,7 @@ module.exports = (pool) => {
     router.post('/reloadCaption', async (req, res, next) => {
         const videoId = req.body.videoId;
         const curIndex = req.body.curIndex;
-        const isLower = req.body.isLower;
+        const isLower = req.body.scrollDirection;
 
         const step = 10;
 
@@ -84,7 +84,7 @@ module.exports = (pool) => {
         captions = captions.slice(begin, end);
 
         const data = {
-            check,
+            scrollDirection: isLower,
             captions
         };
 
@@ -92,9 +92,18 @@ module.exports = (pool) => {
     });
 
     router.post('/loadCurIndex', (req, res, next) => {
-        const uid = req.body.uid;
+        const uid = req.body.id;
+        const videoId = req.body.videoId;
         const curIndex = req.body.curIndex;
         // TODO: DB에 curIndex 저장 후 리턴
+        const sql = 'UPDATE viewdata_tb SET cap_index = ? WHERE uid=? AND vid=?';
+        pool.query(sql, [curIndex, uid, videoId],(err, results)=>{
+            if (err) {
+                console.log(err);
+                return next(err);
+            }
+        });
+
         return res.status(200).json({ curIndex });
     });
 
