@@ -3,7 +3,7 @@ import { HeaderTag, UserInfoWrapper } from "../../../styles/landing/header";
 import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MenuItmes from "./menuItmes";
-import DropDown from "./dropdown";
+import DropDown from "./dropDown";
 import logo from "../../../assets/logo.png";
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -48,8 +48,6 @@ const Header = () => {
                             </Link>
                     }
                 </UserInfoWrapper>
-
-
             </HeaderTag>
             {/* pc일 경우 드롭다운 보이지 않게 설정함 */}
             <DropDown open={open} setOpen={setOpen} />

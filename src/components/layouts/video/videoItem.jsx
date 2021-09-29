@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import styled, { css } from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { LOAD_SCRIPT_REQUEST } from '../../../reducers/video';
 const ListItem = styled.li`
     margin-bottom: 10px;
@@ -29,15 +29,20 @@ const ListItem = styled.li`
 `
 const VideoItem = memo(({ video, display }) => {
     const { thumbnails, title, resourceId: { videoId } } = video.snippet;
+    const { me } = useSelector(({ user }) => user);
     const dispatch = useDispatch();
-    const onShowVideo = () => {
+    const onShowScriptWithVideo = () => {
+        // TODO : 서버에게 데이터 이렇게 보낸다 말해야됌. 그전엔 에러.
         dispatch({
             type: LOAD_SCRIPT_REQUEST,
-            data: videoId,
+            data: {
+                id: me.id,
+                videoId,
+            },
         });
     }
     return (
-        <ListItem onClick={onShowVideo} display={display}>
+        <ListItem onClick={onShowScriptWithVideo} display={display}>
             <div>
                 <img src={thumbnails.medium.url} alt="thumbnail" />
                 <h1>{title}</h1>
