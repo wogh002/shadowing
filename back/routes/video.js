@@ -31,7 +31,6 @@ module.exports = (pool) => {
             }
             const selectedIndex = results[0].selectedIndex;
 
-
             //caption data load
             const captionTracks = await getTracks(videoId);
 
@@ -43,13 +42,19 @@ module.exports = (pool) => {
             insertCapIdx(captions);
             const maxlen = captions.length;
 
+            const begin = selectedIndex - 5;
+            const end = selectedIndex + 5;
+            if (begin < 0) {
+                end -= begin;
+                begin = 0;
+            }
             captions = captions.slice(selectedIndex - 5, selectedIndex + 5);
 
             // TODO: DB에서 selectedIndex 불러오기
             const data = {
                 videoId,
                 selectedIndex,
-                endIndex: maxlen-1,
+                endIndex: maxlen - 1,
                 captions
             };
             res.send(data);
@@ -97,7 +102,7 @@ module.exports = (pool) => {
         const curIndex = req.body.curIndex;
         // TODO: DB에 curIndex 저장 후 리턴
         const sql = 'UPDATE viewdata_tb SET cap_index = ? WHERE uid=? AND vid=?';
-        pool.query(sql, [curIndex, uid, videoId],(err, results)=>{
+        pool.query(sql, [curIndex, uid, videoId], (err, results) => {
             if (err) {
                 console.log(err);
                 return next(err);
