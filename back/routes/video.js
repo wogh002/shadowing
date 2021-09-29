@@ -41,12 +41,15 @@ module.exports = (pool) => {
 
             let captions = await getCaptions(videoId, enCaptionTrack);
             insertCapIdx(captions);
+            const maxlen = captions.length;
+            
             captions = captions.slice(selectedIndex, selectedIndex+10);
 
             // TODO: DB에서 selectedIndex 불러오기
             const data = {
                 videoId,
                 selectedIndex,
+                endIndex: maxlen,
                 captions
             };
             res.send(data);
