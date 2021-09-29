@@ -49,7 +49,7 @@ module.exports = (pool) => {
             const data = {
                 videoId,
                 selectedIndex,
-                endIndex: maxlen,
+                endIndex: maxlen-1,
                 captions
             };
             res.send(data);
@@ -103,7 +103,7 @@ module.exports = (pool) => {
                 return next(err);
             }
         });
-        
+
         return res.status(200).json({ curIndex });
     });
 
