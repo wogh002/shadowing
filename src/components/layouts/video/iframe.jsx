@@ -4,8 +4,11 @@ const Iframe = ({ videoInfo }) => {
     //1초 1000ms
     //10초 10000ms
     //11초 11000ms
-    const start = Math.floor(videoInfo.captions[videoInfo.selectedIndex].start);
-    const removedFloatDur = Math.ceil(videoInfo.captions[videoInfo.selectedIndex].duration);
+    console.log(videoInfo);
+    const start = Math.floor(videoInfo.captions[videoInfo.selectedIndex - videoInfo.captions[0].curIndex].start);
+    //captions[996]
+    //996-986=10;
+    const removedFloatDur = Math.ceil(videoInfo.captions[videoInfo.selectedIndex - videoInfo.captions[0].curIndex].duration);
     const endTime = start + removedFloatDur;
     const dur = Number(`${removedFloatDur.toString()}000`);
     let id = null;
@@ -15,12 +18,12 @@ const Iframe = ({ videoInfo }) => {
     const STOP = 2;
     console.log(`start : ${start} s`);
     console.log(`dur : ${dur} ms`);
-    
+
     const opts = {
         height: '360',
         width: '640',
         playerVars: {
-            autoplay :1,
+            autoplay: 1,
             playlist: videoInfo.videoId,
             enablejsapi: 1,
             disablekb: 1,

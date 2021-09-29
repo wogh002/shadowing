@@ -32,6 +32,9 @@ const loadScriptAPI = (data) => {
 const loadCurIndexAPI = data => {
     return axios.post('/video/loadCurIndex', data);
 }
+const loadScrollScriptAPI = data => {
+    return axios.post('/video/reloadCaption',data);
+}
 
 function* loadVideo() {
     try {
@@ -79,11 +82,10 @@ function* loadCurIndex(action) {
 }
 function* loadScrollScript(action) {
     try {
-        // const result = yield call(loadScrollScriptAPI, action.data);
+        const result = yield call(loadScrollScriptAPI, action.data);
         yield put({
             type: SCROLL_SCRIPT_SUCCESS,
-            data: action.data,
-            // data: result.data.curIndex
+            data: result.data,
         });
     } catch (error) {
         yield put({

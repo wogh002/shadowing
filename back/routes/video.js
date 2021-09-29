@@ -43,7 +43,7 @@ module.exports = (pool) => {
             insertCapIdx(captions);
             const maxlen = captions.length;
 
-            captions = captions.slice(selectedIndex, selectedIndex + 10);
+            captions = captions.slice(selectedIndex - 5, selectedIndex + 5);
 
             // TODO: DB에서 selectedIndex 불러오기
             const data = {

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { CURRENT_INDEX_REQUEST } from '../../../reducers/video';
 const HOUR_SECONDS = 3600;
 const MINUTE_SECONDS = 60;
@@ -41,10 +41,15 @@ const getTime = (SEC) => {
 const Script = ({ videoId, item, selectedIndex, curIndex }) => {
     const dispatch = useDispatch();
     const START_SEC = Math.floor(item.start);
+    const { me } = useSelector(({ user }) => user);
     const onSendCurIndex = () => {
         dispatch({
             type: CURRENT_INDEX_REQUEST,
-            data: { curIndex, videoId }
+            data: {
+                curIndex,
+                videoId,
+                id: me.id,
+            }
         });
     };
     return (

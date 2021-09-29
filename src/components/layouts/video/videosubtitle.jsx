@@ -4,24 +4,24 @@ import { useDispatch } from 'react-redux';
 import { SCROLL_SCRIPT_REQUEST } from '../../../reducers/video';
 import Script from './script';
 const VideoSubTitle = ({ videoInfo }) => {
+    console.log(videoInfo);
     const DISTANCE = 250;
-    const FIRST_SCRIPT = "EP.";
     const target = useRef();
     const belowDirectionTarget = useRef();
     const aboveDirectionTarget = useRef();
     const dispatch = useDispatch();
     useEffect(() => {
         const lastIndex = videoInfo.captions[videoInfo.captions.length - 1].curIndex;
-        // TODO: 서버에서 endIndex를 정상적으로 받아온다면 주석 해제.
-        // if(videoInfo.endIndex === lastIndex) {
-        //     return false;
-        // }
+        if (videoInfo.endIndex === lastIndex) {
+            return false;
+        }
         const io = new IntersectionObserver(([{ isIntersecting }]) => {
             isIntersecting && dispatch({
                 type: SCROLL_SCRIPT_REQUEST,
                 data: {
-                    lastIndex,
+                    curIndex: lastIndex,
                     scrollDirection: isIntersecting,
+                    videoId: videoInfo.videoId,
                 }
             })
         }, {
@@ -32,17 +32,18 @@ const VideoSubTitle = ({ videoInfo }) => {
     }, [videoInfo, dispatch]);
 
     useEffect(() => {
-        if (videoInfo.captions[0].text.includes(FIRST_SCRIPT)) {
+        const firstIndex = videoInfo.captions[0].curIndex;
+        if (firstIndex === 0) {
             return false;
         }
-        const firstIndex = videoInfo.captions[0].curIndex;
         const io = new IntersectionObserver(([{ isIntersecting }]) => {
             if (isIntersecting) {
                 dispatch({
                     type: SCROLL_SCRIPT_REQUEST,
                     data: {
-                        firstIndex,
+                        curIndex: firstIndex,
                         scrollDirection: false,
+                        videoId: videoInfo.videoId,
                     }
                 })
                 target.current.scrollTop = DISTANCE;
