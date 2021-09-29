@@ -1,47 +1,78 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useRef, useEffect } from 'react';
+import { Section } from '../../../styles/video/videoSubTitle';
+import { useDispatch } from 'react-redux';
+import { SCROLL_SCRIPT_REQUEST } from '../../../reducers/video';
 import Script from './script';
-const Section = styled.section`
-    border:  1px solid #e0e1e6;
-    padding: 25px;
-    & > h1 {
-        font-size : 13px;
-        font-weight: 700;
-        letter-spacing: -0.02em;
-        text-align : center;
-        margin-bottom: 25px;
-    }
-    dl {
-        font-size : 12px;
-        overflow-y : scroll;
-        height: 250px;
-    }
-      /* --- desktop --- */
-    @media ${({ theme: { desktop } }) => desktop} {
-        dl {
-            font-size : 15px;
-        }
-        & > h1 {
-            font-size : 19px;
-        }
-    }
-`
 const VideoSubTitle = ({ videoInfo }) => {
+    const DISTANCE = 250;
+    const FIRST_SCRIPT = "EP.";
+    const target = useRef();
+    const belowDirectionTarget = useRef();
+    const aboveDirectionTarget = useRef();
+    const dispatch = useDispatch();
+    useEffect(() => {
+        const lastIndex = videoInfo.captions[videoInfo.captions.length - 1].curIndex;
+        // TODO: 서버에서 endIndex를 정상적으로 받아온다면 주석 해제.
+        // if(videoInfo.endIndex === lastIndex) {
+        //     return false;
+        // }
+        const io = new IntersectionObserver(([{ isIntersecting }]) => {
+            isIntersecting && dispatch({
+                type: SCROLL_SCRIPT_REQUEST,
+                data: {
+                    lastIndex,
+                    scrollDirection: isIntersecting,
+                }
+            })
+        }, {
+            threshold: 0.7
+        });
+        io.observe(belowDirectionTarget.current);
+        return () => io && io.disconnect(belowDirectionTarget)
+    }, [videoInfo, dispatch]);
+
+    useEffect(() => {
+        if (videoInfo.captions[0].text.includes(FIRST_SCRIPT)) {
+            return false;
+        }
+        const firstIndex = videoInfo.captions[0].curIndex;
+        const io = new IntersectionObserver(([{ isIntersecting }]) => {
+            if (isIntersecting) {
+                dispatch({
+                    type: SCROLL_SCRIPT_REQUEST,
+                    data: {
+                        firstIndex,
+                        scrollDirection: false,
+                    }
+                })
+                target.current.scrollTop = DISTANCE;
+            }
+        }, {
+            threshold: 1
+        });
+        io.observe(aboveDirectionTarget.current);
+        return () => io && io.disconnect(aboveDirectionTarget);
+    }, [dispatch, videoInfo, target]);
     return (
         <Section>
             <h1>SCRIPT</h1>
-            <dl>
+            <dl ref={target}>
+                <div ref={aboveDirectionTarget}>
+                </div>
                 {
-                    videoInfo.captions.map((item, index) =>
+                    videoInfo.captions.map((item) =>
                         <Script
-                            key={index}
-                            curIndex={index}
+                            videoId={videoInfo.videoId}
+                            key={item.curIndex}
+                            curIndex={item.curIndex}
                             selectedIndex={videoInfo.selectedIndex}
                             item={item}
                         />)
                 }
+                <div ref={belowDirectionTarget}>
+                </div>
             </dl>
-        </Section>
+        </Section >
     )
 }
 export default VideoSubTitle;

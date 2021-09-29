@@ -26,7 +26,6 @@ const Div = styled.div`
     `}
 `
 const getTime = (SEC) => {
-    //1 % 3  1을 3으로 나누면 몫은 0 나머지는 1
     const MIN =
         parseInt((SEC % HOUR_SECONDS) / MINUTE_SECONDS) < TEN_SECONDS ?
             CHARACTER_0 + parseInt((SEC % HOUR_SECONDS) / MINUTE_SECONDS)
@@ -39,19 +38,19 @@ const getTime = (SEC) => {
             SEC % MINUTE_SECONDS;
     return MIN + ":" + SECOND;
 }
-const Script = ({ item, selectedIndex, curIndex }) => {
+const Script = ({ videoId, item, selectedIndex, curIndex }) => {
     const dispatch = useDispatch();
     const START_SEC = Math.floor(item.start);
-    const onClick = () => {
+    const onSendCurIndex = () => {
         dispatch({
             type: CURRENT_INDEX_REQUEST,
-            data: { curIndex }
+            data: { curIndex, videoId }
         });
     };
     return (
         <Div color={selectedIndex === curIndex ? "true" : "false"}>
             <dt>{getTime(START_SEC)}</dt>
-            <dd onClick={onClick}>{item.text}</dd>
+            <dd onClick={onSendCurIndex}>{item.text}</dd>
         </Div>
     )
 }
