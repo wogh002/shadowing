@@ -56,7 +56,6 @@ function* signUp(action) {
     }
 }
 function* logIn(action) {
-    //action.data 에는 {id,pw}
     try {
         const result = yield call(logInAPI, action.data);
         yield delay(1000);
@@ -65,8 +64,6 @@ function* logIn(action) {
             data: result.data
         });
     } catch (error) {
-        console.log(error);
-        // error id pw 다를 경우 
         yield put({
             type: LOGIN_FAILURE,
             error: error.response.data
@@ -101,7 +98,6 @@ function* loadUser() {
         })
     }
 }
-
 function* watchCheckId() {
     yield takeLatest(CHECK_ID_REQUEST, checkId);
 }

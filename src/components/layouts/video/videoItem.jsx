@@ -32,7 +32,6 @@ const VideoItem = memo(({ video, display }) => {
     const { me } = useSelector(({ user }) => user);
     const dispatch = useDispatch();
     const onShowScriptWithVideo = () => {
-        // TODO : 서버에게 데이터 이렇게 보낸다 말해야됌. 그전엔 에러.
         dispatch({
             type: LOAD_SCRIPT_REQUEST,
             data: {

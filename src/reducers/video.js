@@ -12,7 +12,7 @@ export const SCROLL_SCRIPT_SUCCESS = "SCROLL_SCRIPT_SUCCESS";
 export const SCROLL_SCRIPT_FAILURE = "SCROLL_SCRIPT_FAILURE";
 // const dummyVideo = () => ({
 //     videoId: 'qw0_BhMRP-M',
-//      endIndex:578,
+//     endIndex:578,
 //     selectedIndex: 0,
 //     captions: [
 //         {
@@ -20,60 +20,6 @@ export const SCROLL_SCRIPT_FAILURE = "SCROLL_SCRIPT_FAILURE";
 //             start: 17,
 //             duration: 2,
 //             curIndex: 0,
-//         },
-//         {
-//             text: 'ㅇㅋㄷㅋ',
-//             start: 80,
-//             duration: 3,
-//             curIndex: 1,
-//         },
-//         {
-//             text: '시원하군.',
-//             start: 90,
-//             duration: 4,
-//             curIndex: 2,
-//         },
-//         {
-//             text: '먹을거줄까 ?',
-//             start: 100,
-//             duration: 2,
-//             curIndex: 3,
-//         },
-//         {
-//             text: '네 주세요',
-//             start: 110,
-//             duration: 3,
-//             curIndex: 4,
-//         },
-//         {
-//             text: '알겠어 여기',
-//             start: 120,
-//             duration: 4,
-//             curIndex: 5,
-//         },
-//         {
-//             text: '감사합니다',
-//             start: 130,
-//             duration: 4,
-//             curIndex: 6,
-//         },
-//         {
-//             text: '근데 이거 맛이왜이래요?',
-//             start: 140,
-//             duration: 4,
-//             curIndex: 7,
-//         },
-//         {
-//             text: '상한거야',
-//             start: 150,
-//             duration: 4,
-//             curIndex: 8,
-//         },
-//         {
-//             text: 'ㅠㅠ너무하네요',
-//             start: 160,
-//             duration: 4,
-//             curIndex: 9,
 //         },
 //     ],
 // });

@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { SCROLL_SCRIPT_REQUEST } from '../../../reducers/video';
 import Script from './script';
 const VideoSubTitle = ({ videoInfo }) => {
-    console.log(videoInfo);
     const DISTANCE = 250;
     const target = useRef();
     const belowDirectionTarget = useRef();
@@ -25,7 +24,7 @@ const VideoSubTitle = ({ videoInfo }) => {
                 }
             })
         }, {
-            threshold: 0.7
+            threshold: 0.3
         });
         io.observe(belowDirectionTarget.current);
         return () => io && io.disconnect(belowDirectionTarget)
