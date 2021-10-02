@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { CURRENT_INDEX_REQUEST } from '../../../reducers/video';
+import { decode } from 'html-entities';
 const HOUR_SECONDS = 3600;
 const MINUTE_SECONDS = 60;
 const TEN_SECONDS = 10;
@@ -55,7 +56,11 @@ const Script = ({ videoId, item, selectedIndex, curIndex }) => {
     return (
         <Div color={selectedIndex === curIndex ? "true" : "false"}>
             <dt>{getTime(START_SEC)}</dt>
-            <dd onClick={onSendCurIndex}>{item.text}</dd>
+            <dd onClick={onSendCurIndex}>
+                {
+                    decode(item.text, { level: 'html5' })
+                }
+            </dd>
         </Div>
     )
 }
