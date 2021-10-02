@@ -50,6 +50,4 @@ const VideoDetail = memo(({ videoInfo }) => {
     </Div>
   )
 });
-
-
 export default VideoDetail;

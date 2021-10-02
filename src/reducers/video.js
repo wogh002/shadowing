@@ -28,19 +28,15 @@ const initalState = {
     loadVideoLoading: false,
     loadVideoDone: false,
     loadVideoError: false,
-
     videoInfo: null,
     loadScriptLoading: false,
     loadScriptDone: false,
     loadScriptError: false,
-
     sendIndexDone: false,
     sendIndexError: false,
-
     scrollScriptLoading: false,
     scrollScriptDone: false,
     scrollScriptError: false,
-
 }
 const reducer = (state = initalState, action) => {
     switch (action.type) {
@@ -135,5 +131,3 @@ const reducer = (state = initalState, action) => {
     }
 }
 export default reducer;
-
-

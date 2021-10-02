@@ -7,4 +7,3 @@ const useInput = (defaultValue) => {
     return [value, handler,setValue];
 }
 export default useInput;
-

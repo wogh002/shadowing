@@ -34,7 +34,6 @@ const Section = styled.section`
     }
 `
 const Videolist = () => {
-    // TODO : 유저가 로그인 하지 않았다면 로그인 요청 페이지 생성.
     const dispatch = useDispatch();
     const {
         videos,
