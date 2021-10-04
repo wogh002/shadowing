@@ -50,7 +50,6 @@ function* loadVideo() {
 function* loadScript(action) {
     try {
         const result = yield call(loadScriptAPI, action.data);
-        console.log(result.data);
         yield put({
             type: LOAD_SCRIPT_SUCCESS,
             data: result.data

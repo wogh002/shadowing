@@ -3,6 +3,7 @@ import { Section } from '../../../styles/video/videoSubTitle';
 import { useDispatch } from 'react-redux';
 import { SCROLL_SCRIPT_REQUEST } from '../../../reducers/video';
 import Script from './script';
+import StudyTime from './studyTime';
 const VideoSubTitle = ({ videoInfo }) => {
     const DISTANCE = 150;
     const target = useRef();
@@ -56,6 +57,7 @@ const VideoSubTitle = ({ videoInfo }) => {
     return (
         <Section>
             <h1>SCRIPT</h1>
+            <StudyTime />
             <dl ref={target}>
                 <div ref={aboveDirectionTarget}>
                 </div>

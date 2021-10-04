@@ -14,12 +14,18 @@ export const LOGIN_FAILURE = "LOGIN_FAILURE";
 export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const LOGOUT_FAILURE = "LOGOUT_FAILURE";
+export const STUDY_TIME_REQUEST = "STUDY_TIME_REQUEST";
+export const STUDY_TIME_SUCCESS = "STUDY_TIME_SUCCESS";
+export const STUDY_TIME_FAILURE = "STUDY_TIME_FAILURE";
 export const checkIdRequestAction = (data) => ({ type: CHECK_ID_REQUEST, data });
-// me 
+// TODO: LOAD_USER_REQUEST 성공시 백엔드에게 studyTime 넣어달라고 하면됌.
+// me {
 // id: 7
 // nickname: "재호"
 // userId: "ekem159"
 // userPwd: "123"
+// studyTime : 260,
+
 // userVideo :  {
 //  curIndex : 1,
 //  videoId : 'sdfcxzxcvxcz',
@@ -42,6 +48,8 @@ const initalState = {
     logOutLoading: false,
     logOutDone: false,
     logOutError: false,
+    studyTimeDone: false,
+    studyTimeError: false,
 }
 const reducer = (state = initalState, action) => {
     switch (action.type) {
@@ -155,6 +163,22 @@ const reducer = (state = initalState, action) => {
                 ...state,
                 logOutLoading: false,
                 logOutError: action.error,
+            }
+        case STUDY_TIME_REQUEST:
+            return {
+                ...state,
+                studyTimeDone: false,
+                studyTimeError: false,
+            }
+        case STUDY_TIME_SUCCESS:
+            return {
+                ...state,
+                studyTimeDone: true,
+            }
+        case STUDY_TIME_FAILURE:
+            return {
+                ...state,
+                studyTimeError: action.error,
             }
         default: return state;
     }

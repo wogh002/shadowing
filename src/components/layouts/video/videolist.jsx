@@ -40,7 +40,9 @@ const Videolist = () => {
         loadVideoDone,
         videoInfo
     } = useSelector(({ videoReducer }) => videoReducer);
-    useEffect(() => dispatch({ type: LOAD_VIDEO_REQUEST }), [dispatch]);
+    useEffect(() => {
+        dispatch({ type: LOAD_VIDEO_REQUEST });
+    }, [dispatch]);
     return (
         <Section display={(!videoInfo).toString()}>
             {

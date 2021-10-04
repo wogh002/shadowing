@@ -35,6 +35,7 @@
     "server": "nodemon index.js --prefix back",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
+  "author": "JaehoMinsu",
   "eslintConfig": {
     "extends": [
       "react-app",
