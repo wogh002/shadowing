@@ -24,7 +24,7 @@ export const checkIdRequestAction = (data) => ({ type: CHECK_ID_REQUEST, data })
 // nickname: "재호"
 // userId: "ekem159"
 // userPwd: "123"
-// studyTime : 260,
+// studySec : 260,
 
 // userVideo :  {
 //  curIndex : 1,
@@ -173,6 +173,10 @@ const reducer = (state = initalState, action) => {
         case STUDY_TIME_SUCCESS:
             return {
                 ...state,
+                me: {
+                    ...state.me,
+                    studySec: action.data,
+                },
                 studyTimeDone: true,
             }
         case STUDY_TIME_FAILURE:

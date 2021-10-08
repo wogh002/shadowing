@@ -1,17 +1,26 @@
 import { all, fork, put, delay, takeLatest, call } from 'redux-saga/effects';
 import {
-    CHECK_ID_FAILURE, CHECK_ID_REQUEST, CHECK_ID_SUCCESS,
+    CHECK_ID_FAILURE,
+    CHECK_ID_REQUEST,
+    CHECK_ID_SUCCESS,
     LOAD_USER_FAILURE,
     LOAD_USER_REQUEST,
     LOAD_USER_SUCCESS,
-    LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS,
+    LOGIN_FAILURE,
+    LOGIN_REQUEST,
+    LOGIN_SUCCESS,
     LOGOUT_FAILURE,
     LOGOUT_REQUEST,
     LOGOUT_SUCCESS,
-    SIGN_UP_FAILURE, SIGN_UP_REQUEST, SIGN_UP_SUCCESS
+    SIGN_UP_FAILURE,
+    SIGN_UP_REQUEST,
+    SIGN_UP_SUCCESS,
+    STUDY_TIME_FAILURE,
+    STUDY_TIME_REQUEST,
+    STUDY_TIME_SUCCESS
 } from '../reducers/user';
 import axios from '../service/axios';
-const checkIdAPI = (data) => {
+const checkIdAPI = data => {
     return axios.post('/user/checkId', data);
 }
 const signUpAPI = data => {
@@ -26,6 +35,9 @@ const logOutAPI = () => {
 const loadUserAPI = () => {
     return axios.get('/user/loadUser');
 }
+// const loadStudyTimeAPI = data => {
+//     return axios.post('/user/studyTime', data);
+// }
 function* checkId(action) {
     try {
         yield delay(1000);
@@ -98,6 +110,21 @@ function* loadUser() {
         })
     }
 }
+function* loadStudyTime(action) {
+    try {
+        // const result = yield call(loadStudyTimeAPI, action.data);
+        yield put({
+            type: STUDY_TIME_SUCCESS,
+            data: action.data
+            // data: result.data,
+        });
+    } catch (error) {
+        yield put({
+            type: STUDY_TIME_FAILURE,
+            error: error.response.data
+        })
+    }
+}
 function* watchCheckId() {
     yield takeLatest(CHECK_ID_REQUEST, checkId);
 }
@@ -113,6 +140,9 @@ function* watchLogOut() {
 function* watchLoadUser() {
     yield takeLatest(LOAD_USER_REQUEST, loadUser);
 }
+function* watchStudyTime() {
+    yield takeLatest(STUDY_TIME_REQUEST, loadStudyTime);
+}
 export default function* userSaga() {
     yield all([
         fork(watchCheckId),
@@ -120,5 +150,6 @@ export default function* userSaga() {
         fork(watchLogIn),
         fork(watchLogOut),
         fork(watchLoadUser),
+        fork(watchStudyTime),
     ])
 }
