@@ -74,5 +74,4 @@ const SignupSuccess = () => {
         </SignupSuccessSection>
     )
 }
-
 export default SignupSuccess;

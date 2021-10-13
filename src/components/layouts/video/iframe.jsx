@@ -1,14 +1,14 @@
 import React from 'react';
 import YouTube from 'react-youtube';
 const Iframe = ({ videoInfo }) => {
-    //1초 1000ms
-    //10초 10000ms
-    //11초 11000ms
-    console.log(videoInfo);
-    const start = Math.floor(videoInfo.captions[videoInfo.selectedIndex - videoInfo.captions[0].curIndex].start);
-    //captions[996]
-    //996-986=10;
-    const removedFloatDur = Math.ceil(videoInfo.captions[videoInfo.selectedIndex - videoInfo.captions[0].curIndex].duration);
+    const { captions, selectedIndex,videoId } = videoInfo;
+    const getCurScriptInfo = () => {
+        // getCurScriptInfo 함수의 목적 === 현재의 selectedIndex 를 구해야한다.
+        //Tip.데이터 10개씩 불러옴.
+        return captions[selectedIndex - captions[0].curIndex]
+    }
+    const start = Math.floor(getCurScriptInfo().start);
+    const removedFloatDur = Math.ceil(getCurScriptInfo().duration);
     const endTime = start + removedFloatDur;
     const dur = Number(`${removedFloatDur.toString()}000`);
     let id = null;
@@ -16,15 +16,12 @@ const Iframe = ({ videoInfo }) => {
     let RESTART = false;
     const PLAYING = 1;
     const STOP = 2;
-    console.log(`start : ${start} s`);
-    console.log(`dur : ${dur} ms`);
-
     const opts = {
         height: '360',
         width: '640',
         playerVars: {
             autoplay: 1,
-            playlist: videoInfo.videoId,
+            playlist: videoId,
             enablejsapi: 1,
             disablekb: 1,
             controls: 0,
@@ -59,10 +56,9 @@ const Iframe = ({ videoInfo }) => {
     return <YouTube
         id="player"
         src="https://www.youtube.com/embed/"
-        videoId={videoInfo.videoId}
+        videoId={videoId}
         opts={opts}
         onStateChange={onStateChange}
     />
 };
-
 export default Iframe;

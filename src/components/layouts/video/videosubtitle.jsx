@@ -3,9 +3,9 @@ import { Section } from '../../../styles/video/videoSubTitle';
 import { useDispatch } from 'react-redux';
 import { SCROLL_SCRIPT_REQUEST } from '../../../reducers/video';
 import Script from './script';
+import StudyTime from './studyTime';
 const VideoSubTitle = ({ videoInfo }) => {
-    console.log(videoInfo);
-    const DISTANCE = 250;
+    const DISTANCE = 150;
     const target = useRef();
     const belowDirectionTarget = useRef();
     const aboveDirectionTarget = useRef();
@@ -25,7 +25,7 @@ const VideoSubTitle = ({ videoInfo }) => {
                 }
             })
         }, {
-            threshold: 0.7
+            threshold: 0.1
         });
         io.observe(belowDirectionTarget.current);
         return () => io && io.disconnect(belowDirectionTarget)
@@ -57,6 +57,7 @@ const VideoSubTitle = ({ videoInfo }) => {
     return (
         <Section>
             <h1>SCRIPT</h1>
+            <StudyTime />
             <dl ref={target}>
                 <div ref={aboveDirectionTarget}>
                 </div>

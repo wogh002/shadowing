@@ -1,7 +1,8 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { LOAD_SCRIPT_REQUEST } from '../../../reducers/video';
+import { useHistory } from 'react-router';
 const ListItem = styled.li`
     margin-bottom: 10px;
     cursor: pointer;
@@ -30,9 +31,12 @@ const ListItem = styled.li`
 const VideoItem = memo(({ video, display }) => {
     const { thumbnails, title, resourceId: { videoId } } = video.snippet;
     const { me } = useSelector(({ user }) => user);
+    const history = useHistory();
     const dispatch = useDispatch();
+    useEffect(() => {
+        !me && history.push('/error');
+    }, [history, me]);
     const onShowScriptWithVideo = () => {
-        // TODO : 서버에게 데이터 이렇게 보낸다 말해야됌. 그전엔 에러.
         dispatch({
             type: LOAD_SCRIPT_REQUEST,
             data: {
@@ -50,6 +54,4 @@ const VideoItem = memo(({ video, display }) => {
         </ListItem>
     )
 });
-
-
 export default VideoItem;

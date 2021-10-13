@@ -7,7 +7,7 @@ export const Section = styled.section`
         font-weight: 700;
         letter-spacing: -0.02em;
         text-align : center;
-        margin-bottom: 25px;
+        margin-bottom: 19px;
     }
     dl {
         font-size : 12px;

@@ -54,5 +54,4 @@ const MenuItmes = () => {
         </Items>
     )
 }
-
 export default MenuItmes;

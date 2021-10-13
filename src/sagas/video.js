@@ -25,20 +25,16 @@ const loadVideoAPI = () => {
     })
 }
 const loadScriptAPI = (data) => {
-    //TODO : 서버에게 데이터 요청 (id,videoId). 전달해야됌.
     return axios.get(`/video/loadscript/${data.id}/${data.videoId}`);
 }
-
 const loadCurIndexAPI = data => {
     return axios.post('/video/loadCurIndex', data);
 }
 const loadScrollScriptAPI = data => {
     return axios.post('/video/reloadCaption',data);
 }
-
 function* loadVideo() {
     try {
-        // call  === await
         const result = yield call(loadVideoAPI);
         yield put({
             type: LOAD_VIDEO_SUCCESS,
@@ -54,7 +50,6 @@ function* loadVideo() {
 function* loadScript(action) {
     try {
         const result = yield call(loadScriptAPI, action.data);
-        console.log(result.data);
         yield put({
             type: LOAD_SCRIPT_SUCCESS,
             data: result.data

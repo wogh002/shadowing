@@ -46,5 +46,4 @@ const Main = () => {
         </MainTag>
     )
 };
-
 export default Main;
