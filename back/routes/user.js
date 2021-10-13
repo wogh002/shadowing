@@ -20,7 +20,7 @@ module.exports = (pool) => {
             (err, results, fields) => {
                 if (err) {
                     console.log(err);
-                    return next(arr);
+                    return next(err);
                 }
                 console.log('Create account end: ' + results);
                 res.send("계정 생성 완료");
@@ -70,7 +70,7 @@ module.exports = (pool) => {
         const uid = req.body.id;
         const studySec = req.body.studySec;
         //DB에 studytime을 더하여 저장
-        const sql = 'UPDATE userdata_tb SET studyTime = studyTime + ? WHERE uid = ?';
+        const sql = 'UPDATE userdata_tb SET studyTime = ? WHERE uid = ?';
         pool.query(sql, [studySec, uid], (err, results)=>{
             if(err) {
                 console.log(err);
