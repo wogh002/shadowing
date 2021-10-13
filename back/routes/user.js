@@ -11,7 +11,7 @@ module.exports = (pool) => {
     });
 
     router.post('/join', (req, res, next) => {
-        let sql = 'INSERT INTO userdata_tb VALUES (null,?,?,?,0)';
+        let sql = 'INSERT INTO userdata_tb VALUES (null,?,?,?,0,0)';
         let id = req.body.id;
         let password = req.body.password;
         let name = req.body.nickname;
@@ -63,7 +63,22 @@ module.exports = (pool) => {
         req.logout();
         req.session.destroy();
         res.send('ok');
-    })
+    });
+
+
+    router.post('/studyTime', (req, res, next) => {
+        const uid = req.body.id;
+        const studySec = req.body.studySec;
+        //DB에 studytime을 더하여 저장
+        const sql = 'UPDATE userdata_tb SET studyTime = studyTime + ? WHERE uid = ?';
+        pool.query(sql, [studySec, uid], (err, results)=>{
+            if(err) {
+                console.log(err);
+                return next(err);
+            };
+        })
+        return res.json(studySec);
+    });
 
     return router;
 }
