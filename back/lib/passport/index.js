@@ -7,7 +7,7 @@ module.exports = (pool) => {
     });
     passport.deserializeUser((userId, done) => {
         console.log('deserialize ' + userId);
-        let sql = 'SELECT uid as id, user_id as userId, user_pwd as userPwd, user_nm as nickname FROM userdata_tb WHERE user_id=?';
+        let sql = 'SELECT uid as id, user_id as userId, user_pwd as userPwd, user_nm as nickname, studyTime as studySec FROM userdata_tb WHERE user_id=?';
         pool.query(sql, [userId],
             (err, rows, fields) => {
                 if (err) {
