@@ -18,7 +18,6 @@ export const STUDY_TIME_REQUEST = "STUDY_TIME_REQUEST";
 export const STUDY_TIME_SUCCESS = "STUDY_TIME_SUCCESS";
 export const STUDY_TIME_FAILURE = "STUDY_TIME_FAILURE";
 export const checkIdRequestAction = (data) => ({ type: CHECK_ID_REQUEST, data });
-// TODO: LOAD_USER_REQUEST 성공시 백엔드에게 studyTime 넣어달라고 하면됌.
 // me {
 // id: 7
 // nickname: "재호"
