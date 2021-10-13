@@ -35,9 +35,9 @@ const logOutAPI = () => {
 const loadUserAPI = () => {
     return axios.get('/user/loadUser');
 }
-// const loadStudyTimeAPI = data => {
-//     return axios.post('/user/studyTime', data);
-// }
+const loadStudyTimeAPI = data => {
+    return axios.post('/user/studyTime', data);
+}
 function* checkId(action) {
     try {
         yield delay(1000);
@@ -112,11 +112,10 @@ function* loadUser() {
 }
 function* loadStudyTime(action) {
     try {
-        // const result = yield call(loadStudyTimeAPI, action.data);
+        const result = yield call(loadStudyTimeAPI, action.data);
         yield put({
             type: STUDY_TIME_SUCCESS,
-            data: action.data
-            // data: result.data,
+            data: result.data,
         });
     } catch (error) {
         yield put({

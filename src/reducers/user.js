@@ -24,7 +24,7 @@ export const checkIdRequestAction = (data) => ({ type: CHECK_ID_REQUEST, data })
 // nickname: "재호"
 // userId: "ekem159"
 // userPwd: "123"
-// studySec : 260,
+// studySec : 0,
 
 // userVideo :  {
 //  curIndex : 1,

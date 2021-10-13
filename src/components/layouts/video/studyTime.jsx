@@ -38,9 +38,8 @@ const getTime = (STUDY_SEC) => {
     }
 }
 const StudyTime = () => {
-    const { me } = useSelector(({ user }) => user); 
-    // TODO: change 3385 to me.studySec after request back-end
-    const { CUR_HOUR, CUR_MIN, CUR_SEC } = useMemo(() => getTime(0), []);
+    const { me } = useSelector(({ user }) => user);
+    const { CUR_HOUR, CUR_MIN, CUR_SEC } = useMemo(() => getTime(me.studySec), [me]);
     const interval = useRef(null);
     const [hour, setHour] = useState(Number(CUR_HOUR));
     const [min, setMin] = useState(Number(CUR_MIN));
@@ -66,18 +65,20 @@ const StudyTime = () => {
             clearInterval(interval.current);
         }
     }, [hour, min, sec]);
-    // TODO: change to me.studySec + 20 after request back-end
     useEffect(() => {
         const studyTime = setInterval(() => {
             dispatch({
                 type: STUDY_TIME_REQUEST,
-                data: 3385 + 20,
+                data: {
+                    id: me.id,
+                    studySec: me.studySec + 20,
+                }
             });
-        }, 3000);
+        }, 20000);
         return () => {
             clearInterval(studyTime);
         }
-    }, [dispatch]);
+    }, [dispatch, me]);
     return (
         <Timer>
             {me.userId} 🥇 {hour}:{min}:{sec}
