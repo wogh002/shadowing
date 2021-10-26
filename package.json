@@ -2,6 +2,7 @@
   "name": "shadowing",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://wogh002.github.io/shadowing/",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
@@ -11,6 +12,7 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
     "concurrently": "^6.2.1",
+    "gh-pages": "^3.2.3",
     "html-entities": "^2.3.2",
     "nodemon": "^2.0.12",
     "react": "^17.0.2",
@@ -33,7 +35,9 @@
     "eject": "react-scripts eject",
     "client": "npm start",
     "server": "nodemon index.js --prefix back",
-    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build"
   },
   "author": "JaehoMinsu",
   "eslintConfig": {
