@@ -1,70 +1,34 @@
-# Getting Started with Create React App
+# Shadowing
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### Skills 📝
 
-In the project directory, you can run:
+<img alt="HTML5" src ="https://img.shields.io/badge/HTML5-E34F26.svg?&style=for-the-badge&logo=HTML5&logoColor=white"/> <img alt="CSS3" src ="https://img.shields.io/badge/CSS3-1572B6.svg?&style=for-the-badge&logo=CSS3&logoColor=white"/> <img alt="JavaScript" src ="https://img.shields.io/badge/JavaScript-F7DF1E.svg?&style=for-the-badge&logo=JavaScript&logoColor=black"/> <img alt="React" src ="https://img.shields.io/badge/React-61DAFB.svg?&style=for-the-badge&logo=React&logoColor=black"/>
 
-### `npm start`
+<img alt="Redux" src ="https://img.shields.io/badge/Redux-DD3A0A.svg?&style=for-the-badge&logo=Redux&logoColor=black"/> <img alt="ReduxSaga" src ="https://img.shields.io/badge/ReduxSaga-2C8EBB.svg?&style=for-the-badge&logo=ReduxSaga&logoColor=white"/> <img alt="nodeJS" src ="https://img.shields.io/badge/nodejs-FF6C37.svg?&style=for-the-badge&logo=nodeJS&logoColor=white"/> <img alt="React Router" src ="https://img.shields.io/badge/React Router-FF6C37.svg?&style=for-the-badge&logo=React Router&logoColor=white"/>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 어떤 프로젝트 ❓
 
-### `npm test`
+쉐도잉이란 
+배우의 목소리, 행동 등을 그대로 따라 하는 것을 의미. <br><br>
+한국에서는 한국인들을 위해 영어를 유창하게 말 할 수 있도록 만들어진 쉐도잉 프로그램이 다양하게 존재.<br><br>
+하지만 시장에 외국인들이 자연스러운 한국어를 구사 할 수 있도록 도와줄 수 있는 프로그램은 없었다.<br><br>
+외국인들에게 도움이 되고 싶었고, 독창적인 프로젝트를 진행하고 싶었다.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![image](https://user-images.githubusercontent.com/79042667/140606903-72894653-8588-433b-a5ce-88a8d86ae257.png)
 
-### `npm run build`
+*****
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 어떤 기능 ❓
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+회원가입 <br><br>
+로그인<br><br>
+로그아웃<br><br>
+무한스크롤<br><br>
+YOUTUBE API 비디오 불러오기<br><br>
+대사 무한반복<br><br>
+유저의 공부 시간 저장<br><br>
+유저가 대사 선택시 대사 저장<br><br>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+*****
